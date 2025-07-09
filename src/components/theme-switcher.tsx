@@ -21,7 +21,7 @@ export default function ThemeSwitcher() {
 
   return (
     <button
-      className="cursor-pointer p-2 rounded-sm dark:text-gray-800 dark:bg-white"
+      className="cursor-pointer rounded-sm p-2 dark:bg-white dark:text-gray-800"
       onClick={toggleTheme}
     >
       Dark / Light
