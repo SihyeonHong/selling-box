@@ -1,10 +1,5 @@
-import ThemeSwitcher from "@/components/theme-switcher";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-    <div>
-      selling box 셀링박스
-      <ThemeSwitcher />
-    </div>
-  );
+export default function page() {
+  redirect("/ko");
 }
