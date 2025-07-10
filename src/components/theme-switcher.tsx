@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 
 export default function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -12,16 +12,21 @@ export default function ThemeSwitcher() {
   }, []);
 
   if (!mounted) {
-    return null; // Prevents hydration mismatch
+    // Prevents hydration mismatch
+    return (
+      <button className="text-foreground bg-background cursor-pointer rounded-sm p-2">
+        ...
+      </button>
+    );
   }
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
 
   return (
     <button
-      className="cursor-pointer rounded-sm p-2 dark:bg-white dark:text-gray-800"
+      className="text-foreground bg-background cursor-pointer rounded-sm p-2 dark:bg-white dark:text-gray-800"
       onClick={toggleTheme}
     >
       Dark / Light
