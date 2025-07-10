@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function ThemeSwitcher() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -13,23 +14,12 @@ export default function ThemeSwitcher() {
 
   if (!mounted) {
     // Prevents hydration mismatch
-    return (
-      <button className="text-foreground bg-background cursor-pointer rounded-sm p-2">
-        ...
-      </button>
-    );
+    return <Button disabled>Loading...</Button>;
   }
 
   const toggleTheme = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
 
-  return (
-    <button
-      className="text-foreground bg-background cursor-pointer rounded-sm p-2"
-      onClick={toggleTheme}
-    >
-      Dark / Light
-    </button>
-  );
+  return <Button onClick={toggleTheme}>Dark / Light</Button>;
 }
