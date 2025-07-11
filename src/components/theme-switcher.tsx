@@ -2,9 +2,10 @@
 
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function ThemeSwitcher() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -12,19 +13,13 @@ export default function ThemeSwitcher() {
   }, []);
 
   if (!mounted) {
-    return null; // Prevents hydration mismatch
+    // Prevents hydration mismatch
+    return <Button disabled>Loading...</Button>;
   }
 
   const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
 
-  return (
-    <button
-      className="cursor-pointer rounded-sm p-2 dark:bg-white dark:text-gray-800"
-      onClick={toggleTheme}
-    >
-      Dark / Light
-    </button>
-  );
+  return <Button onClick={toggleTheme}>Dark / Light</Button>;
 }

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
-import "@/app/globals.css";
+import "@/styles/globals.css";
 import { ThemeProvider } from "@/provider/theme-provider";
+import { LayoutProps } from "@/types/props";
 
 const notoSans = Noto_Sans_KR({
   subsets: ["latin"],
@@ -15,13 +16,11 @@ export const metadata: Metadata = {
   description: "판매 중인 물건을 한 눈에 둘러보세요",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children, params }: LayoutProps) {
+  const resolvedParams = await params;
+
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html lang={resolvedParams?.locale || "ko"} suppressHydrationWarning>
       <body
         className={`${notoSans.variable} ${notoSans.className} antialiased`}
       >
