@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/provider/theme-provider";
-import { LayoutProps } from "@/types/props";
+import { MyLayoutProps } from "@/types/props";
 
 const notoSans = Noto_Sans_KR({
   subsets: ["latin"],
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description: "판매 중인 물건을 한 눈에 둘러보세요",
 };
 
-export default async function RootLayout({ children, params }: LayoutProps) {
+export default async function RootLayout({ children, params }: MyLayoutProps) {
   const resolvedParams = await params;
 
   return (
