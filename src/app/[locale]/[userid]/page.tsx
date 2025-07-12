@@ -1,3 +1,5 @@
+import GalleryForProducts from "@/components/gallery-for-products";
+
 interface Props {
   params: {
     locale: string;
@@ -12,10 +14,7 @@ export default async function Page({ params }: Props) {
   return (
     <div className="flex flex-col items-center justify-center gap-3">
       <h1>Welcome to the User {userid} Page</h1>
-      <p>
-        모바일 먼저 개발하라니까 그럼 장터 소개 페이지를 어떻게 하지 갤러리 뷰를
-        먼저 만들고 장터 소개랑 메뉴 위치를 고민할까
-      </p>
+      <GalleryForProducts />
     </div>
   );
 }
