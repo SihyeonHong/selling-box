@@ -9,7 +9,7 @@
 #### 네이밍 규칙
 
 - 타입명, 컴포넌트명: `PascalCase`
-- 변수명, 함수명: `camelCase`
+- 변수명, 함수명, 객체 속성명: `camelCase` (DB 컬럼명은 `snake_case`이니 변환 주의)
 - 폴더명, 파일명: `kebab-case` (단, Next.js의 컨벤션을 우선으로 함)
 
 ##### Boolean 변수 네이밍
