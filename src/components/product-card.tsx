@@ -4,18 +4,15 @@ import {
   CardDescription,
   CardTitle,
 } from "@/components/ui/card";
-import { Image } from "lucide-react";
+import NoImage from "./no-image";
 
 export default function ProductCard() {
   return (
-    <Card className="h-40">
-      <CardContent className="flex w-full flex-col items-start justify-between gap-1 px-1">
-        <Image
-          aria-label="default image icon"
-          className="text-muted-foreground h-20 w-full"
-        />
+    <Card className="h-36 py-1">
+      <CardContent className="flex w-full flex-col items-start justify-between gap-2 px-1">
+        <NoImage rounded="md" />
         <CardTitle>상품 이름</CardTitle>
-        <CardDescription>가격</CardDescription>
+        <CardDescription>10,000 원</CardDescription>
       </CardContent>
     </Card>
   );
