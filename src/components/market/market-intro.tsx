@@ -3,8 +3,8 @@ import {
   CardContent,
   CardTitle,
   CardDescription,
-} from "@/components/ui/card";
-import NoImage from "@/components/no-image";
+} from "@/components/common/shadcn/card";
+import NoImage from "@/components/common/no-image";
 
 interface MarketIntroProps {
   userId: string;

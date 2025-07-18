@@ -1,5 +1,6 @@
-import GalleryForProducts from "@/components/gallery-for-products";
-import MarketIntro from "@/components/market-intro";
+import GalleryForProducts from "@/components/market/gallery-for-products";
+import LoadingPage from "@/components/common/loading/loading-page";
+import MarketIntro from "@/components/market/market-intro";
 
 interface Props {
   params: Promise<{
@@ -9,8 +10,11 @@ interface Props {
 }
 
 export default async function Page({ params }: Props) {
-  // 지금은 아직 비동기 아닌데 Next.js가 비동기로 바꿀거라고 함
-  const { userId } = await params; // 서버 에러 무시 어차피 200
+  const { userId } = await params;
+
+  if (!userId || typeof userId !== "string" || userId.trim() === "") {
+    return <LoadingPage />;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center gap-3 p-4">
