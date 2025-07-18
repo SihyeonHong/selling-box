@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/common/shadcn/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/common/shadcn/card";
 import {
   Sidebar,
   SidebarContent,
@@ -15,10 +15,10 @@ import {
   SidebarMenuButton,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { Skeleton } from "@/components/ui/skeleton";
+} from "@/components/common/shadcn/sidebar";
+import { Input } from "@/components/common/shadcn/input";
+import { Separator } from "@/components/common/shadcn/separator";
+import { Skeleton } from "@/components/common/shadcn/skeleton";
 
 export default function ThemeTester() {
   return (
@@ -173,6 +173,9 @@ export default function ThemeTester() {
       </Card>
 
       {/* Sidebar Test */}
+      <SidebarProvider>
+        <SidebarTrigger />
+      </SidebarProvider>
       <Card>
         <CardHeader>
           <CardTitle>Sidebar Test</CardTitle>

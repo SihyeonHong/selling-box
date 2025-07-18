@@ -1,4 +1,4 @@
-import ProductCard from "@/components/product-card";
+import ProductCard from "@/components/market/product-card";
 
 export default function GalleryForProducts() {
   const cardCount = 11;
