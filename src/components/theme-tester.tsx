@@ -6,6 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/common/shadcn/card";
+import { Input } from "@/components/common/shadcn/input";
+import { Separator } from "@/components/common/shadcn/separator";
 import {
   Sidebar,
   SidebarContent,
@@ -16,8 +18,6 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/common/shadcn/sidebar";
-import { Input } from "@/components/common/shadcn/input";
-import { Separator } from "@/components/common/shadcn/separator";
 import { Skeleton } from "@/components/common/shadcn/skeleton";
 
 export default function ThemeTester() {

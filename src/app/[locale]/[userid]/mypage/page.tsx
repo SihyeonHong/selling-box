@@ -1,4 +1,5 @@
 import LoadingPage from "@/components/common/loading/loading-page";
+import ImageEditorContainer from "@/components/mypage/image-editor";
 
 interface Props {
   params: Promise<{
@@ -18,6 +19,7 @@ export default async function MyPage({ params }: Props) {
     <div>
       <h1>My Page</h1>
       <p>User ID: {userId}</p>
+      <ImageEditorContainer />
     </div>
   );
 }

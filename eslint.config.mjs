@@ -14,6 +14,7 @@ const compat = new FlatCompat({
 import reactHooks from "eslint-plugin-react-hooks"; // React Hooks 규칙 플러그인
 import prettier from "eslint-config-prettier"; // Prettier와 ESLint 충돌 방지용 설정
 import unusedImports from "eslint-plugin-unused-imports"; // 사용하지 않는 import/변수 검사 플러그인
+import importPlugin from "eslint-plugin-import"; // import 순서 정리 플러그인
 
 const eslintConfig = [
   // 4. Next.js 및 TypeScript 관련 기본 ESLint 설정 확장 (core web vitals, 타입스크립트 검사 포함)
@@ -24,6 +25,7 @@ const eslintConfig = [
     plugins: {
       "react-hooks": reactHooks, // React Hooks 검사 플러그인 등록
       "unused-imports": unusedImports, // 사용 안 하는 import/변수 검사 플러그인 등록
+      import: importPlugin, // import 순서 정리 플러그인 등록
     },
     rules: {
       // 6. React Hooks 관련 주요 룰 설정
@@ -41,9 +43,30 @@ const eslintConfig = [
           argsIgnorePattern: "^_", // 매개변수도 _로 시작하면 무시
         },
       ],
+
+      // 8. import 순서 정리 관련 룰
+      "import/order": [
+        "error",
+        {
+          groups: [
+            "builtin", // Node.js 내장 모듈 (path, fs 등)
+            "external", // node_modules의 외부 라이브러리
+            "internal", // 프로젝트 내부 절대 경로 import
+            "parent", // 상위 디렉터리 상대 경로 (../)
+            "sibling", // 같은 디렉터리 상대 경로 (./)
+            "index", // index 파일
+          ],
+          "newlines-between": "always", // 그룹 간 빈 줄 추가
+          alphabetize: {
+            order: "asc", // 알파벳 순서로 정렬
+            caseInsensitive: true, // 대소문자 구분 안 함
+          },
+        },
+      ],
+      "import/newline-after-import": "error", // import 구문 후 빈 줄 강제
     },
   },
-  // 8. Prettier 설정 적용: ESLint와 포맷팅 충돌하는 룰 비활성화
+  // 9. Prettier 설정 적용: ESLint와 포맷팅 충돌하는 룰 비활성화
   {
     name: "prettier",
     rules: prettier.rules,

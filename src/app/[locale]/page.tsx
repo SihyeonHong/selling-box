@@ -1,6 +1,7 @@
-import ThemeSwitcher from "@/components/theme-switcher";
-import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+
+import ThemeSwitcher from "@/components/theme-switcher";
 
 export default async function page() {
   const t = await getTranslations("title");

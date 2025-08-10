@@ -1,5 +1,6 @@
-import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+
 import { routing } from "@/i18n/routing";
 import { MyLayoutProps } from "@/types/props";
 

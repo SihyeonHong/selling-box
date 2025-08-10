@@ -1,10 +1,10 @@
+import NoImage from "@/components/common/no-image";
 import {
   Card,
   CardContent,
   CardTitle,
   CardDescription,
 } from "@/components/common/shadcn/card";
-import NoImage from "@/components/common/no-image";
 
 interface MarketIntroProps {
   userId: string;

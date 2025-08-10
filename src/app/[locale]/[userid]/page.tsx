@@ -1,5 +1,5 @@
-import GalleryForProducts from "@/components/market/gallery-for-products";
 import LoadingPage from "@/components/common/loading/loading-page";
+import GalleryForProducts from "@/components/market/gallery-for-products";
 import MarketIntro from "@/components/market/market-intro";
 
 interface Props {

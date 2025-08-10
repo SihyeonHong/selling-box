@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
+
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { MyLayoutProps } from "@/types/props";
