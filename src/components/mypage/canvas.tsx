@@ -27,7 +27,7 @@ export default function Canvas({
       className="relative border border-dashed border-gray-300 bg-gray-50"
       style={{ cursor: isDragging ? "grabbing" : "default" }}
     >
-      <NoImage rounded="none" size="xl" />
+      <NoImage rounded="none" size="full" />
 
       {cutLines.map((line) => (
         <CutLine

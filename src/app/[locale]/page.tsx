@@ -16,6 +16,9 @@ export default async function page() {
       <Link href={`/violet123`} className="hover:underline">
         사용자 violet123의 페이지
       </Link>
+      <Link href={`/violet123/mypage`} className="hover:underline">
+        사용자 violet123의 마이페이지
+      </Link>
     </div>
   );
 }

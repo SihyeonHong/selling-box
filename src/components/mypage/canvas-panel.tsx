@@ -20,9 +20,11 @@ export default function CanvasPanel({
   totalImages,
 }: CanvasPanelProps) {
   return (
-    <div className="my-4 flex gap-4">
-      <Button onClick={onAddVerticalLine}>| 세로 절취선 추가</Button>
-      <Button onClick={onAddHorizontalLine}>- 가로 절취선 추가</Button>
+    <div className="flex flex-col flex-wrap gap-4 md:flex-row">
+      <div className="flex flex-wrap gap-2">
+        <Button onClick={onAddVerticalLine}>| 세로 절취선 추가</Button>
+        <Button onClick={onAddHorizontalLine}>- 가로 절취선 추가</Button>
+      </div>
       <Button onClick={onClearAllLines} variant="outline">
         모든 절취선 삭제
       </Button>
