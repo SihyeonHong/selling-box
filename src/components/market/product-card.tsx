@@ -1,10 +1,10 @@
+import NoImage from "@/components/common/no-image";
 import {
   Card,
   CardContent,
   CardDescription,
   CardTitle,
 } from "@/components/common/shadcn/card";
-import NoImage from "@/components/common/no-image";
 
 export default function ProductCard() {
   return (

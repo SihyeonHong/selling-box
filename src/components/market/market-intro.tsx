@@ -1,10 +1,10 @@
+import NoImage from "@/components/common/no-image";
 import {
   Card,
   CardContent,
   CardTitle,
   CardDescription,
 } from "@/components/common/shadcn/card";
-import NoImage from "@/components/common/no-image";
 
 interface MarketIntroProps {
   userId: string;
@@ -14,7 +14,7 @@ export default function MarketIntro({ userId }: MarketIntroProps) {
   return (
     <Card className="w-full gap-0">
       <CardContent className="flex items-center gap-4">
-        <NoImage />
+        <NoImage size="md" />
         <div className="flex-1">
           <CardTitle className="mb-2 text-xl">{userId}의 마켓</CardTitle>
           <CardDescription className="text-sm leading-relaxed">

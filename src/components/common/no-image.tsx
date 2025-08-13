@@ -1,8 +1,9 @@
-import { cn } from "@/utils/class-name";
 import { Image } from "lucide-react";
 
+import { cn } from "@/utils/class-name";
+
 interface NoImageProps {
-  size?: "sm" | "md" | "lg" | "xl" | "custom";
+  size?: "sm" | "md" | "lg" | "full" | "custom";
   rounded?: "none" | "sm" | "md" | "lg" | "full";
   className?: string;
   iconClassName?: string;
@@ -10,26 +11,25 @@ interface NoImageProps {
 }
 
 export default function NoImage({
-  size = "md",
+  size = "full",
   rounded = "full",
   className,
   iconClassName,
   ariaLabel = "default profile image",
 }: NoImageProps) {
   const containerSize = size === "custom" ? "" : containerSizeClasses[size];
-  const iconSize = size === "custom" ? "" : iconSizeClasses[size];
 
   return (
     <div
       className={cn(
-        "bg-muted flex items-center justify-center",
+        "bg-muted flex aspect-square items-center justify-center",
         containerSize,
         roundedClasses[rounded],
         className,
       )}
     >
       <Image
-        className={cn("text-muted-foreground", iconSize, iconClassName)}
+        className={cn("text-muted-foreground h-1/2 w-1/2", iconClassName)}
         aria-label={ariaLabel}
       />
     </div>
@@ -40,15 +40,7 @@ const containerSizeClasses = {
   sm: "h-12 w-12",
   md: "h-20 w-20",
   lg: "h-28 w-28",
-  xl: "h-36 w-36",
-  custom: "",
-};
-
-const iconSizeClasses = {
-  sm: "h-6 w-6",
-  md: "h-10 w-10",
-  lg: "h-14 w-14",
-  xl: "h-20 w-20",
+  full: "h-full w-full max-w-full",
   custom: "",
 };
 
