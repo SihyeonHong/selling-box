@@ -1,4 +1,3 @@
-import LoadingPage from "@/components/common/loading/loading-page";
 import ImageEditorContainer from "@/components/mypage/image-editor";
 
 interface Props {
@@ -10,10 +9,6 @@ interface Props {
 
 export default async function MyPage({ params }: Props) {
   const { userId } = await params;
-
-  if (!userId || typeof userId !== "string" || userId.trim() === "") {
-    return <LoadingPage />;
-  }
 
   return (
     <div>
