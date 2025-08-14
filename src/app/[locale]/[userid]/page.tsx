@@ -17,7 +17,7 @@ export default async function Page({ params }: Props) {
   if (!userId || typeof userId !== "string" || userId.trim() === "") {
     console.log("Invalid userId:", userId);
     console.log("Type of userId:", typeof userId);
-    console.log("Trimming userId:", userId.trim());
+    console.log("Trimming userId:", userId ? userId.trim() : "N/A");
     return <LoadingPage />;
   }
 
