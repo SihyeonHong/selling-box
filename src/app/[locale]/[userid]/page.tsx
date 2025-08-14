@@ -1,4 +1,3 @@
-import LoadingPage from "@/components/common/loading/loading-page";
 import GalleryForProducts from "@/components/market/gallery-for-products";
 import MarketIntro from "@/components/market/market-intro";
 
@@ -10,16 +9,7 @@ interface Props {
 }
 
 export default async function Page({ params }: Props) {
-  const { locale, userId } = await params;
-  console.log("Locale:", locale);
-  console.log("User ID:", userId);
-
-  if (!userId || typeof userId !== "string" || userId.trim() === "") {
-    console.log("Invalid userId:", userId);
-    console.log("Type of userId:", typeof userId);
-    console.log("Trimming userId:", userId ? userId.trim() : "N/A");
-    return <LoadingPage />;
-  }
+  const { userId } = await params;
 
   return (
     <div className="flex flex-col items-center justify-center gap-3 p-4">
