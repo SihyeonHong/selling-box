@@ -11,6 +11,8 @@ interface MarketIntroProps {
 }
 
 export default function MarketIntro({ userId }: MarketIntroProps) {
+  console.log("MarketIntro userId:", userId);
+
   return (
     <Card className="w-full gap-0">
       <CardContent className="flex items-center gap-4">
