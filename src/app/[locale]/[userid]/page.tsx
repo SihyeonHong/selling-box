@@ -10,9 +10,14 @@ interface Props {
 }
 
 export default async function Page({ params }: Props) {
-  const { userId } = await params;
+  const { locale, userId } = await params;
+  console.log("Locale:", locale);
+  console.log("User ID:", userId);
 
   if (!userId || typeof userId !== "string" || userId.trim() === "") {
+    console.log("Invalid userId:", userId);
+    console.log("Type of userId:", typeof userId);
+    console.log("Trimming userId:", userId.trim());
     return <LoadingPage />;
   }
 
