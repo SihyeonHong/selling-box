@@ -9,10 +9,7 @@ interface Props {
 }
 
 export default async function Page({ params }: Props) {
-  const resolvedParams = await params;
-  console.log("resolvedParams:", resolvedParams);
-  const { userId } = resolvedParams;
-  console.log("userId:", userId);
+  const { userId } = await params;
 
   return (
     <div className="flex flex-col items-center justify-center gap-3 p-4">
