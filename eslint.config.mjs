@@ -1,5 +1,6 @@
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+
 import { FlatCompat } from "@eslint/eslintrc";
 
 // 1. Node.js 모듈에서 현재 파일 경로(__filename)와 디렉터리 경로(__dirname)를 얻음
@@ -11,10 +12,10 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
-import reactHooks from "eslint-plugin-react-hooks"; // React Hooks 규칙 플러그인
 import prettier from "eslint-config-prettier"; // Prettier와 ESLint 충돌 방지용 설정
-import unusedImports from "eslint-plugin-unused-imports"; // 사용하지 않는 import/변수 검사 플러그인
 import importPlugin from "eslint-plugin-import"; // import 순서 정리 플러그인
+import reactHooks from "eslint-plugin-react-hooks"; // React Hooks 규칙 플러그인
+import unusedImports from "eslint-plugin-unused-imports"; // 사용하지 않는 import/변수 검사 플러그인
 
 const eslintConfig = [
   // 4. Next.js 및 TypeScript 관련 기본 ESLint 설정 확장 (core web vitals, 타입스크립트 검사 포함)

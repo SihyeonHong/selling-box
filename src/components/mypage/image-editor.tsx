@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/common/shadcn/input";
 import Canvas from "@/components/mypage/canvas";
 import CanvasPanel from "@/components/mypage/canvas-panel";
+import ImageContainer from "@/components/mypage/image-container";
 import useCutLines from "@/hooks/useCutLines";
 import useDragHandler from "@/hooks/useDragHandler";
 
@@ -45,6 +46,7 @@ export default function ImageEditorContainer() {
         </CardHeader>
 
         <CardContent>
+          <ImageContainer />
           <Canvas
             containerRef={containerRef}
             cutLines={cutLines}
