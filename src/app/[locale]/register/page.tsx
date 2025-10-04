@@ -1,10 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
 import {
   Eye,
   EyeOff,
@@ -13,6 +9,10 @@ import {
   CheckCircle,
   XCircle,
 } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { Button } from "@/components/common/shadcn/button";
@@ -38,15 +38,14 @@ import { registerSchema, type RegisterFormData } from "@/types/auth";
 
 export default function RegisterPage() {
   const t = useTranslations("auth.register");
-  const tValidation = useTranslations("auth.validation");
   const tMessages = useTranslations("auth.messages");
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isCheckingUsername, setIsCheckingUsername] = useState(false);
+  const [isCheckingName, setIsCheckingName] = useState(false);
   const [isSendingEmail, setIsSendingEmail] = useState(false);
-  const [usernameStatus, setUsernameStatus] = useState<
+  const [nameStatus, setNameStatus] = useState<
     "idle" | "checking" | "available" | "unavailable"
   >("idle");
   const [emailStatus, setEmailStatus] = useState<
@@ -56,7 +55,6 @@ export default function RegisterPage() {
   const form = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      username: "",
       name: "",
       email: "",
       password: "",
@@ -65,15 +63,15 @@ export default function RegisterPage() {
     },
   });
 
-  const handleCheckUsername = async () => {
-    const username = form.getValues("username");
-    if (!username || username.length < 3) {
-      toast.error("아이디를 3자 이상 입력해주세요");
+  const handleCheckName = async () => {
+    const name = form.getValues("name");
+    if (!name || name.length < 2) {
+      toast.error("이름을 2자 이상 입력해주세요");
       return;
     }
 
-    setIsCheckingUsername(true);
-    setUsernameStatus("checking");
+    setIsCheckingName(true);
+    setNameStatus("checking");
 
     try {
       // TODO: 실제 API 호출로 교체
@@ -83,17 +81,18 @@ export default function RegisterPage() {
       const isAvailable = Math.random() > 0.5;
 
       if (isAvailable) {
-        setUsernameStatus("available");
+        setNameStatus("available");
         toast.success(t("available"));
       } else {
-        setUsernameStatus("unavailable");
+        setNameStatus("unavailable");
         toast.error(t("unavailable"));
       }
     } catch (error) {
-      setUsernameStatus("idle");
+      console.error("Name check error:", error);
+      setNameStatus("idle");
       toast.error("중복 확인 중 오류가 발생했습니다");
     } finally {
-      setIsCheckingUsername(false);
+      setIsCheckingName(false);
     }
   };
 
@@ -114,6 +113,7 @@ export default function RegisterPage() {
       setEmailStatus("sent");
       toast.success(t("verificationSent"));
     } catch (error) {
+      console.error("Email verification error:", error);
       setEmailStatus("idle");
       toast.error("인증번호 전송 중 오류가 발생했습니다");
     } finally {
@@ -122,8 +122,8 @@ export default function RegisterPage() {
   };
 
   const onSubmit = async (data: RegisterFormData) => {
-    if (usernameStatus !== "available") {
-      toast.error("아이디 중복확인을 해주세요");
+    if (nameStatus !== "available") {
+      toast.error("이름 중복확인을 해주세요");
       return;
     }
 
@@ -169,12 +169,12 @@ export default function RegisterPage() {
               >
                 <FormField
                   control={form.control}
-                  name="username"
+                  name="name"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="flex items-center gap-2">
                         <AtSign className="h-4 w-4" />
-                        {t("username")}
+                        {t("name")}
                       </FormLabel>
                       <FormControl>
                         <div className="relative">
@@ -182,34 +182,32 @@ export default function RegisterPage() {
                             <AtSign className="text-muted-foreground h-4 w-4" />
                           </div>
                           <Input
-                            placeholder={t("usernamePlaceholder")}
+                            placeholder={t("namePlaceholder")}
                             {...field}
-                            disabled={
-                              isLoading || usernameStatus === "available"
-                            }
+                            disabled={isLoading || nameStatus === "available"}
                             className="pr-24 pl-10"
                           />
                           <div className="absolute top-1/2 right-2 flex -translate-y-1/2 items-center gap-1">
-                            {usernameStatus === "available" && (
+                            {nameStatus === "available" && (
                               <CheckCircle className="h-4 w-4 text-green-500" />
                             )}
-                            {usernameStatus === "unavailable" && (
+                            {nameStatus === "unavailable" && (
                               <XCircle className="h-4 w-4 text-red-500" />
                             )}
                             <Button
                               type="button"
                               size="sm"
                               variant="outline"
-                              onClick={handleCheckUsername}
+                              onClick={handleCheckName}
                               disabled={
-                                isCheckingUsername ||
+                                isCheckingName ||
                                 isLoading ||
                                 !field.value ||
-                                field.value.length < 3
+                                field.value.length < 2
                               }
                               className="h-7 px-2 text-xs"
                             >
-                              {isCheckingUsername ? (
+                              {isCheckingName ? (
                                 <Loader2 className="h-3 w-3 animate-spin" />
                               ) : (
                                 t("checkDuplicate")
@@ -219,26 +217,8 @@ export default function RegisterPage() {
                         </div>
                       </FormControl>
                       <div className="text-muted-foreground text-xs">
-                        {t("usernameNote")}
+                        {t("nameNote")}
                       </div>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t("name")}</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder={t("namePlaceholder")}
-                          {...field}
-                          disabled={isLoading}
-                        />
-                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}

@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
 import { Eye, EyeOff, Loader2 } from "lucide-react";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import { Button } from "@/components/common/shadcn/button";
@@ -31,9 +31,7 @@ import { loginSchema, type LoginFormData } from "@/types/auth";
 
 export default function LoginPage() {
   const t = useTranslations("auth.login");
-  const tValidation = useTranslations("auth.validation");
   const tMessages = useTranslations("auth.messages");
-  const tFooter = useTranslations("footer");
 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
