@@ -4,6 +4,7 @@ import { Noto_Sans_KR } from "next/font/google";
 import "@/styles/globals.css";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { MyLayoutProps } from "@/types/props";
+import { Toaster } from "@/components/common/shadcn/sonner";
 
 const notoSans = Noto_Sans_KR({
   subsets: ["latin"],
@@ -25,7 +26,10 @@ export default async function RootLayout({ children, params }: MyLayoutProps) {
       <body
         className={`${notoSans.variable} ${notoSans.className} antialiased`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
