@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 
 import "@/styles/globals.css";
+import Header from "@/components/common/header";
 import { ThemeProvider } from "@/provider/theme-provider";
 import { MyLayoutProps } from "@/types/props";
 
@@ -25,7 +26,10 @@ export default async function RootLayout({ children, params }: MyLayoutProps) {
       <body
         className={`${notoSans.variable} ${notoSans.className} antialiased`}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Header />
+          <main className="pt-16">{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   );
