@@ -1,5 +1,19 @@
 {
   "title": {
     "title": "Selling Box"
+  },
+  "footer": {
+    "brandName": "HowMuch",
+    "description": "Browse items for sale at a glance",
+    "services": "Services",
+    "support": "Support",
+    "home": "Home",
+    "login": "Login",
+    "register": "Register",
+    "notice": "Notice",
+    "tester": "Tester",
+    "copyright": "© 2025 HowMuch. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
   }
 }
