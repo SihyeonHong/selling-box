@@ -1,12 +1,13 @@
 import ProductCard from "@/components/market/product-card";
+import { createDefaultMockProducts } from "@/mocks/product-mock";
 
 export default function GalleryForProducts() {
-  const cardCount = 11;
+  const products = createDefaultMockProducts();
 
   return (
-    <div className="grid w-full auto-cols-fr grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
-      {Array.from({ length: cardCount }, (_, index) => (
-        <ProductCard key={index} />
+    <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+      {products.map((product) => (
+        <ProductCard key={product.id} product={product} />
       ))}
     </div>
   );
