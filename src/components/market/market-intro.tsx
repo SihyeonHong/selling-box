@@ -14,7 +14,7 @@ export default function MarketIntro({ userId }: MarketIntroProps) {
   console.log("MarketIntro userId:", userId);
 
   return (
-    <Card className="w-full gap-0">
+    <Card className="w-full max-w-6xl gap-0">
       <CardContent className="flex items-center gap-4">
         <NoImage size="md" />
         <div className="flex-1">

@@ -118,7 +118,7 @@ export default function Page({ params }: Props) {
           </div>
 
           {/* 데스크톱용 오른쪽 패널 */}
-          <div className="hidden lg:block">
+          <div className="hidden md:block">
             <SelectionPanelRight
               selectedProducts={selectedProducts}
               totalPrice={totalPrice}

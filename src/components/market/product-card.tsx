@@ -2,11 +2,12 @@ import Image from "next/image";
 
 import NoImage from "@/components/common/no-image";
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardTitle,
-} from "@/components/common/shadcn/card";
+  Item,
+  ItemContent,
+  ItemDescription,
+  ItemHeader,
+  ItemTitle,
+} from "@/components/common/shadcn/item";
 import { Product } from "@/types/product";
 
 interface ProductCardProps {
@@ -19,8 +20,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Card className="w-full border-2 p-0">
-      <CardContent className="flex flex-col items-center gap-2 p-0">
+    <Item
+      variant="outline"
+      className="w-full flex-col items-center gap-0 border-2 p-0"
+    >
+      <ItemHeader className="w-full p-0">
         <div className="aspect-square w-full">
           {product.image ? (
             <Image
@@ -38,17 +42,16 @@ export default function ProductCard({ product }: ProductCardProps) {
             />
           )}
         </div>
+      </ItemHeader>
 
-        {/* 텍스트 영역 */}
-        <div className="w-full text-center">
-          <CardTitle className="truncate leading-tight">
-            {product.name}
-          </CardTitle>
-          <CardDescription className="">
-            {product.prize ? formatPrice(product.prize) : "가격 미정"}
-          </CardDescription>
-        </div>
-      </CardContent>
-    </Card>
+      <ItemContent className="w-full p-2">
+        <ItemTitle className="line-clamp-2 w-full text-center leading-tight">
+          {product.name}
+        </ItemTitle>
+        <ItemDescription className="text-center">
+          {product.prize ? formatPrice(product.prize) : "가격 미정"}
+        </ItemDescription>
+      </ItemContent>
+    </Item>
   );
 }
