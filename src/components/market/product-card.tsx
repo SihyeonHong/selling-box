@@ -45,9 +45,11 @@ export default function ProductCard({ product }: ProductCardProps) {
       </ItemHeader>
 
       <ItemContent className="w-full p-2">
-        <ItemTitle className="line-clamp-2 w-full text-center leading-tight">
-          {product.name}
-        </ItemTitle>
+        <div className="h-12 w-full">
+          <ItemTitle className="line-clamp-2 w-full text-center leading-tight">
+            {product.name}
+          </ItemTitle>
+        </div>
         <ItemDescription className="text-center">
           {product.prize ? formatPrice(product.prize) : "가격 미정"}
         </ItemDescription>
