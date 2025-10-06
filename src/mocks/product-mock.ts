@@ -8,17 +8,27 @@ const faker = new Faker({ locale: [ko, en] });
 /**
  * 단일 Product 더미 데이터를 생성합니다.
  */
-export function createMockProduct(): Product {
+export function createMockProduct(userId?: string): Product {
   // picsum.photos에서 랜덤 이미지 생성
   const randomSeed = faker.string.alphanumeric(10);
   const imageUrl = `https://picsum.photos/seed/${randomSeed}/300/300`;
 
+  // 20% 확률로 빈 배열, 80% 확률로 이미지 포함
+  const shouldHaveImage = faker.datatype.boolean({ probability: 0.8 });
+  const images = shouldHaveImage ? [imageUrl] : [];
+
+  // 20% 확률로 null, 80% 확률로 가격 포함
+  const shouldHavePrice = faker.datatype.boolean({ probability: 0.8 });
+  const prize = shouldHavePrice
+    ? faker.number.int({ min: 1000, max: 1000000 })
+    : null;
+
   return {
-    userId: "test-user-id",
+    userId: userId || "test-user-id",
     productId: faker.string.uuid(),
     name: generateUniqueProductName(),
-    prize: faker.number.int({ min: 1000, max: 1000000 }),
-    images: [imageUrl],
+    prize,
+    images,
     description: faker.commerce.productDescription(),
   };
 }
