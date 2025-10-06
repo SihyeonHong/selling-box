@@ -1,4 +1,4 @@
-import ProductCardWrapper from "@/components/market/product-card-wrapper";
+import ProductCard from "@/components/market/product-card";
 import { Product } from "@/types/product";
 
 interface GalleryForProductsProps {
@@ -17,7 +17,7 @@ export default function GalleryForProducts({
   return (
     <div className="grid w-full grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
       {products.map((product) => (
-        <ProductCardWrapper
+        <ProductCard
           key={product.id}
           product={product}
           isEditMode={isEditMode}
@@ -26,7 +26,7 @@ export default function GalleryForProducts({
         />
       ))}
       {/* 12번째 카드로 긴 상품명 테스트 */}
-      <ProductCardWrapper
+      <ProductCard
         key={longNameProduct.id}
         product={longNameProduct}
         isEditMode={isEditMode}
