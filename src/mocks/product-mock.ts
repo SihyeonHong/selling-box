@@ -14,10 +14,11 @@ export function createMockProduct(): Product {
   const imageUrl = `https://picsum.photos/seed/${randomSeed}/300/300`;
 
   return {
-    id: faker.string.uuid(),
+    userId: "test-user-id",
+    productId: faker.string.uuid(),
     name: generateUniqueProductName(),
     prize: faker.number.int({ min: 1000, max: 1000000 }),
-    image: imageUrl,
+    images: [imageUrl],
     description: faker.commerce.productDescription(),
   };
 }

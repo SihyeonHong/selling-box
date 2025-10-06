@@ -6,27 +6,24 @@ import { Button } from "@/components/common/shadcn/button";
 import ProductCardContainer from "@/components/market/product-card-container";
 import SelectionPanelBottom from "@/components/market/selection-panel-bottom";
 import SelectionPanelRight from "@/components/market/selection-panel-right";
-import { createDefaultMockProducts } from "@/mocks/product-mock";
+import { Product } from "@/types/product";
 
 interface MarketContentProps {
-  userId: string;
+  products: Product[];
 }
 
-export default function MarketContent({ userId }: MarketContentProps) {
-  console.log("userId", userId);
-
+export default function MarketContent({ products }: MarketContentProps) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedProductIds, setSelectedProductIds] = useState<Set<string>>(
     new Set(),
   );
 
-  // 상품 목록을 한 번만 생성하고 메모이제이션
-  const allProducts = useMemo(() => createDefaultMockProducts(), []);
-
   // 선택된 상품들 계산
   const selectedProducts = useMemo(() => {
-    return allProducts.filter((product) => selectedProductIds.has(product.id));
-  }, [selectedProductIds, allProducts]);
+    return products.filter((product) =>
+      selectedProductIds.has(product.productId),
+    );
+  }, [selectedProductIds, products]);
 
   // 총 가격 계산
   const totalPrice = useMemo(() => {
@@ -93,7 +90,7 @@ export default function MarketContent({ userId }: MarketContentProps) {
         <div className="flex flex-col gap-6 lg:flex-row">
           {/* 갤러리 영역 */}
           <ProductCardContainer
-            products={allProducts}
+            products={products}
             isEditMode={isEditMode}
             selectedProductIds={selectedProductIds}
             onProductSelectionChange={handleProductSelectionChange}

@@ -3,3 +3,10 @@ export interface User {
   name: string;
   email: string;
 }
+
+export interface RegisterForm {
+  name: string;
+  id: string;
+  email: string;
+  password: string;
+}

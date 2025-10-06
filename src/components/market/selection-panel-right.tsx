@@ -55,7 +55,7 @@ export default function SelectionPanelRight({
         <div className="max-h-96 space-y-2 overflow-y-auto">
           {selectedProducts.map((product) => (
             <div
-              key={product.id}
+              key={product.productId}
               className="flex items-center justify-between rounded-md border p-2"
             >
               <div className="min-w-0 flex-1">
@@ -67,7 +67,7 @@ export default function SelectionPanelRight({
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => onRemoveProduct(product.id)}
+                onClick={() => onRemoveProduct(product.productId)}
                 className="text-muted-foreground hover:text-destructive h-6 w-6 p-0"
               >
                 ×

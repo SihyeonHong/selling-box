@@ -26,7 +26,7 @@ export default function ProductCard({
   onSelectionChange,
 }: ProductCardProps) {
   const handleCheckboxChange = (checked: boolean) => {
-    onSelectionChange?.(product.id, checked);
+    onSelectionChange?.(product.productId, checked);
   };
 
   return (
@@ -37,9 +37,9 @@ export default function ProductCard({
       >
         <ItemHeader className="w-full p-2">
           <div className="aspect-square w-full">
-            {product.image ? (
+            {product.images && product.images.length > 0 ? (
               <Image
-                src={product.image}
+                src={product.images[0]}
                 alt={product.name}
                 width={300}
                 height={300}

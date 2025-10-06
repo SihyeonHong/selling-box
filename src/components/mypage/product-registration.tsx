@@ -49,11 +49,12 @@ export default function ProductRegistration() {
       return;
     }
 
-    const productData: Omit<Product, "id"> = {
+    const productData: Omit<Product, "productId"> = {
       name: formData.name.trim(),
-      prize: formData.prize ? Number(formData.prize) : undefined,
-      description: formData.description.trim() || undefined,
-      image: undefined, // 파일 업로드 시 URL 생성 예정
+      prize: formData.prize ? Number(formData.prize) : null,
+      description: formData.description.trim() || null,
+      images: [],
+      userId: "test-user-id",
     };
 
     console.log("상품 등록:", productData);

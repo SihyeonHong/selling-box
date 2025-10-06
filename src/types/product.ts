@@ -1,7 +1,8 @@
 export interface Product {
-  id: string;
+  userId: string;
+  productId: string;
   name: string;
-  prize?: number;
-  image?: string;
-  description?: string;
+  prize: number | null;
+  description: string | null;
+  images: string[]; // images[0] = 썸네일
 }

@@ -43,6 +43,7 @@
 
 - 객체 타입: `interface`. extends 가능하면 하고.
 - 그 외의 타입 (예: 유니언 타입 등): `type`
+- 옵셔널 지양, 필수 필드이되 nullable하게 정의하기. undefined보다 null 지향.
 
 #### 컴포넌트 작성 형식
 

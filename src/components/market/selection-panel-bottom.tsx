@@ -47,7 +47,7 @@ export default function SelectionPanelBottom({
         <div className="max-h-32 space-y-1 overflow-y-auto">
           {selectedProducts.map((product) => (
             <div
-              key={product.id}
+              key={product.productId}
               className="bg-muted flex items-center justify-between rounded-md p-2"
             >
               <div className="min-w-0 flex-1">
@@ -59,7 +59,7 @@ export default function SelectionPanelBottom({
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => onRemoveProduct(product.id)}
+                onClick={() => onRemoveProduct(product.productId)}
                 className="text-muted-foreground hover:text-destructive h-6 w-6 p-0"
               >
                 ×
