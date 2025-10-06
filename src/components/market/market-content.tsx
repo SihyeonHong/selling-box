@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 
 import { Button } from "@/components/common/shadcn/button";
-import GalleryForProducts from "@/components/market/gallery-for-products";
+import ProductCardContainer from "@/components/market/product-card-container";
 import SelectionPanelBottom from "@/components/market/selection-panel-bottom";
 import SelectionPanelRight from "@/components/market/selection-panel-right";
 import { createDefaultMockProducts } from "@/mocks/product-mock";
@@ -14,6 +14,7 @@ interface MarketContentProps {
 
 export default function MarketContent({ userId }: MarketContentProps) {
   console.log("userId", userId);
+
   const [isEditMode, setIsEditMode] = useState(false);
   const [selectedProductIds, setSelectedProductIds] = useState<Set<string>>(
     new Set(),
@@ -91,14 +92,12 @@ export default function MarketContent({ userId }: MarketContentProps) {
       <div className="w-full max-w-6xl">
         <div className="flex flex-col gap-6 lg:flex-row">
           {/* 갤러리 영역 */}
-          <div className="flex-1">
-            <GalleryForProducts
-              products={allProducts}
-              isEditMode={isEditMode}
-              selectedProductIds={selectedProductIds}
-              onProductSelectionChange={handleProductSelectionChange}
-            />
-          </div>
+          <ProductCardContainer
+            products={allProducts}
+            isEditMode={isEditMode}
+            selectedProductIds={selectedProductIds}
+            onProductSelectionChange={handleProductSelectionChange}
+          />
 
           {/* 데스크톱용 오른쪽 패널 */}
           <div className="hidden md:block">
