@@ -1,24 +1,27 @@
 import { Badge } from "@/components/common/shadcn/badge";
 import { Button } from "@/components/common/shadcn/button";
 import { Separator } from "@/components/common/shadcn/separator";
+import { useProductSelection } from "@/hooks/useProductSelection";
 import { Product } from "@/types/product";
+import { formatPrice } from "@/utils/format-price";
 
 interface SelectionPanelBottomProps {
-  selectedProducts: Product[];
-  totalPrice: number;
+  products: Product[];
+  selectedProductIds: Set<string>;
   onRemoveProduct: (productId: string) => void;
   onClearAll: () => void;
 }
 
 export default function SelectionPanelBottom({
-  selectedProducts,
-  totalPrice,
+  products,
+  selectedProductIds,
   onRemoveProduct,
   onClearAll,
 }: SelectionPanelBottomProps) {
-  const formatPrice = (price: number) => {
-    return price.toLocaleString("ko-KR") + " 원";
-  };
+  const { selectedProducts, totalPrice } = useProductSelection({
+    products,
+    selectedProductIds,
+  });
 
   if (selectedProducts.length === 0) {
     return null;

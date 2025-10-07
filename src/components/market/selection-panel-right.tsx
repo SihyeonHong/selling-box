@@ -7,24 +7,27 @@ import {
   CardTitle,
 } from "@/components/common/shadcn/card";
 import { Separator } from "@/components/common/shadcn/separator";
+import { useProductSelection } from "@/hooks/useProductSelection";
 import { Product } from "@/types/product";
+import { formatPrice } from "@/utils/format-price";
 
 interface SelectionPanelRightProps {
-  selectedProducts: Product[];
-  totalPrice: number;
+  products: Product[];
+  selectedProductIds: Set<string>;
   onRemoveProduct: (productId: string) => void;
   onClearAll: () => void;
 }
 
 export default function SelectionPanelRight({
-  selectedProducts,
-  totalPrice,
+  products,
+  selectedProductIds,
   onRemoveProduct,
   onClearAll,
 }: SelectionPanelRightProps) {
-  const formatPrice = (price: number) => {
-    return price.toLocaleString("ko-KR") + " 원";
-  };
+  const { selectedProducts, totalPrice } = useProductSelection({
+    products,
+    selectedProductIds,
+  });
 
   if (selectedProducts.length === 0) {
     return (

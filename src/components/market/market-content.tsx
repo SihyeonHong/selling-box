@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 
 import { Button } from "@/components/common/shadcn/button";
 import ProductCardContainer from "@/components/market/product-card-container";
@@ -17,21 +17,6 @@ export default function MarketContent({ products }: MarketContentProps) {
   const [selectedProductIds, setSelectedProductIds] = useState<Set<string>>(
     new Set(),
   );
-
-  // 선택된 상품들 계산
-  const selectedProducts = useMemo(() => {
-    return products.filter((product) =>
-      selectedProductIds.has(product.productId),
-    );
-  }, [selectedProductIds, products]);
-
-  // 총 가격 계산
-  const totalPrice = useMemo(() => {
-    return selectedProducts.reduce(
-      (sum, product) => sum + (product.prize || 0),
-      0,
-    );
-  }, [selectedProducts]);
 
   // 상품 선택/해제 핸들러
   const handleProductSelectionChange = (
@@ -99,8 +84,8 @@ export default function MarketContent({ products }: MarketContentProps) {
           {/* 데스크톱용 오른쪽 패널 */}
           <div className="hidden md:block">
             <SelectionPanelRight
-              selectedProducts={selectedProducts}
-              totalPrice={totalPrice}
+              products={products}
+              selectedProductIds={selectedProductIds}
               onRemoveProduct={handleRemoveProduct}
               onClearAll={handleClearAll}
             />
@@ -110,8 +95,8 @@ export default function MarketContent({ products }: MarketContentProps) {
 
       {/* 모바일용 하단 패널 */}
       <SelectionPanelBottom
-        selectedProducts={selectedProducts}
-        totalPrice={totalPrice}
+        products={products}
+        selectedProductIds={selectedProductIds}
         onRemoveProduct={handleRemoveProduct}
         onClearAll={handleClearAll}
       />
