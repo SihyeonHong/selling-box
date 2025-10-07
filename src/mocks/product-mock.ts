@@ -30,6 +30,7 @@ export function createMockProduct(userId?: string): Product {
     prize,
     images,
     description: faker.commerce.productDescription(),
+    state: "ACTIVE",
   };
 }
 
