@@ -1,3 +1,4 @@
+import FilteringPanel from "@/components/market/filtering-panel";
 import MarketContent from "@/components/market/market-content";
 import MarketIntro from "@/components/market/market-intro";
 import { createDefaultMockProducts } from "@/mocks/product-mock";
@@ -25,6 +26,7 @@ export default async function Page({ params }: Props) {
   return (
     <div className="flex flex-col items-center justify-center gap-3 p-4 sm:p-8 md:p-16">
       <MarketIntro market={market} />
+      <FilteringPanel />
       <MarketContent products={allProducts} />
     </div>
   );

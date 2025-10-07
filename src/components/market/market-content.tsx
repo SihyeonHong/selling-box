@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-import { Button } from "@/components/common/shadcn/button";
 import ProductCardContainer from "@/components/market/product-card-container";
 import SelectionPanelBottom from "@/components/market/selection-panel-bottom";
 import SelectionPanelRight from "@/components/market/selection-panel-right";
@@ -59,17 +58,6 @@ export default function MarketContent({ products }: MarketContentProps) {
 
   return (
     <>
-      {/* 편집모드 토글 버튼 */}
-      <div className="w-full max-w-6xl">
-        <Button
-          variant={isEditMode ? "default" : "outline"}
-          onClick={toggleEditMode}
-          className="mb-4"
-        >
-          {isEditMode ? "편집 완료" : "상품 선택"}
-        </Button>
-      </div>
-
       {/* 메인 컨테이너 - 반응형 레이아웃 */}
       <div className="w-full max-w-6xl">
         <div className="flex flex-col gap-6 lg:flex-row">
@@ -85,6 +73,8 @@ export default function MarketContent({ products }: MarketContentProps) {
           <div className="hidden md:block">
             <SelectionPanelRight
               products={products}
+              isEditMode={isEditMode}
+              onToggleEditMode={toggleEditMode}
               selectedProductIds={selectedProductIds}
               onRemoveProduct={handleRemoveProduct}
               onClearAll={handleClearAll}
@@ -96,6 +86,8 @@ export default function MarketContent({ products }: MarketContentProps) {
       {/* 모바일용 하단 패널 */}
       <SelectionPanelBottom
         products={products}
+        isEditMode={isEditMode}
+        onToggleEditMode={toggleEditMode}
         selectedProductIds={selectedProductIds}
         onRemoveProduct={handleRemoveProduct}
         onClearAll={handleClearAll}

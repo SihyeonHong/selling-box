@@ -13,6 +13,8 @@ import { formatPrice } from "@/utils/format-price";
 
 interface SelectionPanelRightProps {
   products: Product[];
+  isEditMode: boolean;
+  onToggleEditMode: () => void;
   selectedProductIds: Set<string>;
   onRemoveProduct: (productId: string) => void;
   onClearAll: () => void;
@@ -20,6 +22,8 @@ interface SelectionPanelRightProps {
 
 export default function SelectionPanelRight({
   products,
+  isEditMode,
+  onToggleEditMode,
   selectedProductIds,
   onRemoveProduct,
   onClearAll,
@@ -33,7 +37,16 @@ export default function SelectionPanelRight({
     return (
       <Card className="sticky top-4 h-fit w-80">
         <CardHeader>
-          <CardTitle className="text-lg">선택된 상품</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-lg">선택된 상품</CardTitle>
+            <Button
+              variant={isEditMode ? "default" : "outline"}
+              size="sm"
+              onClick={onToggleEditMode}
+            >
+              {isEditMode ? "편집 완료" : "상품 선택"}
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground py-8 text-center">
@@ -49,7 +62,16 @@ export default function SelectionPanelRight({
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg">선택된 상품</CardTitle>
-          <Badge variant="secondary">{selectedProducts.length}개</Badge>
+          <div className="flex items-center gap-2">
+            <Badge variant="secondary">{selectedProducts.length}개</Badge>
+            <Button
+              variant={isEditMode ? "default" : "outline"}
+              size="sm"
+              onClick={onToggleEditMode}
+            >
+              {isEditMode ? "편집 완료" : "상품 선택"}
+            </Button>
+          </div>
         </div>
       </CardHeader>
 

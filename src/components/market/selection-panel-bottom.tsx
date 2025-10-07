@@ -7,6 +7,8 @@ import { formatPrice } from "@/utils/format-price";
 
 interface SelectionPanelBottomProps {
   products: Product[];
+  isEditMode: boolean;
+  onToggleEditMode: () => void;
   selectedProductIds: Set<string>;
   onRemoveProduct: (productId: string) => void;
   onClearAll: () => void;
@@ -14,6 +16,8 @@ interface SelectionPanelBottomProps {
 
 export default function SelectionPanelBottom({
   products,
+  isEditMode,
+  onToggleEditMode,
   selectedProductIds,
   onRemoveProduct,
   onClearAll,
@@ -23,68 +27,85 @@ export default function SelectionPanelBottom({
     selectedProductIds,
   });
 
-  if (selectedProducts.length === 0) {
-    return null;
-  }
-
   return (
     <div className="bg-background fixed right-0 bottom-0 left-0 z-50 border-t shadow-[0_-8px_12px_-2px_rgba(0,0,0,0.15),0_-4px_8px_-2px_rgba(0,0,0,0.1)] md:hidden">
       <div className="space-y-3 p-4">
-        {/* 선택된 상품 요약 */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="font-medium">선택된 상품</span>
-            <Badge variant="secondary">{selectedProducts.length}개</Badge>
-          </div>
+        {/* 편집모드 토글 버튼 */}
+        <div className="flex justify-center">
           <Button
-            variant="ghost"
-            size="sm"
-            onClick={onClearAll}
-            className="text-muted-foreground hover:text-destructive"
+            variant={isEditMode ? "default" : "outline"}
+            onClick={onToggleEditMode}
+            className="w-full max-w-xs"
           >
-            전체 삭제
+            {isEditMode ? "편집 완료" : "상품 선택"}
           </Button>
         </div>
 
-        {/* 선택된 상품 목록 (스크롤 가능) */}
-        <div className="max-h-32 space-y-1 overflow-y-auto">
-          {selectedProducts.map((product) => (
-            <div
-              key={product.productId}
-              className="bg-muted flex items-center justify-between rounded-md p-2"
-            >
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium">{product.name}</p>
-                <p className="text-muted-foreground text-xs">
-                  {product.prize ? formatPrice(product.prize) : "가격 미정"}
-                </p>
+        {selectedProducts.length === 0 ? (
+          <p className="text-muted-foreground py-4 text-center">
+            상품을 선택해주세요
+          </p>
+        ) : (
+          <>
+            {/* 선택된 상품 요약 */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="font-medium">선택된 상품</span>
+                <Badge variant="secondary">{selectedProducts.length}개</Badge>
               </div>
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => onRemoveProduct(product.productId)}
-                className="text-muted-foreground hover:text-destructive h-6 w-6 p-0"
+                onClick={onClearAll}
+                className="text-muted-foreground hover:text-destructive"
               >
-                ×
+                전체 삭제
               </Button>
             </div>
-          ))}
-        </div>
 
-        <Separator />
+            {/* 선택된 상품 목록 (스크롤 가능) */}
+            <div className="max-h-32 space-y-1 overflow-y-auto">
+              {selectedProducts.map((product) => (
+                <div
+                  key={product.productId}
+                  className="bg-muted flex items-center justify-between rounded-md p-2"
+                >
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-medium">
+                      {product.name}
+                    </p>
+                    <p className="text-muted-foreground text-xs">
+                      {product.prize ? formatPrice(product.prize) : "가격 미정"}
+                    </p>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => onRemoveProduct(product.productId)}
+                    className="text-muted-foreground hover:text-destructive h-6 w-6 p-0"
+                  >
+                    ×
+                  </Button>
+                </div>
+              ))}
+            </div>
 
-        {/* 총 가격 및 구매 버튼 */}
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-muted-foreground text-sm">총 가격</p>
-            <p className="text-primary text-lg font-bold">
-              {formatPrice(totalPrice)}
-            </p>
-          </div>
-          <Button size="lg" className="px-8">
-            구매하기
-          </Button>
-        </div>
+            <Separator />
+
+            {/* 총 가격 및 구매 버튼 */}
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-muted-foreground text-sm">총 가격</p>
+                <p className="text-primary text-lg font-bold">
+                  {formatPrice(totalPrice)}
+                </p>
+              </div>
+              <Button size="lg" className="px-8">
+                구매하기
+              </Button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
