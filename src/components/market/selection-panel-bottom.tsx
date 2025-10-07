@@ -28,7 +28,7 @@ export default function SelectionPanelBottom({
   }
 
   return (
-    <div className="bg-background fixed right-0 bottom-0 left-0 z-50 border-t shadow-lg md:hidden">
+    <div className="bg-background fixed right-0 bottom-0 left-0 z-50 border-t shadow-[0_-8px_12px_-2px_rgba(0,0,0,0.15),0_-4px_8px_-2px_rgba(0,0,0,0.1)] md:hidden">
       <div className="space-y-3 p-4">
         {/* 선택된 상품 요약 */}
         <div className="flex items-center justify-between">
