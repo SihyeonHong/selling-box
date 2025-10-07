@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import MobileSelectionButton from "@/components/market/mobile-selection-button";
 import ProductCardContainer from "@/components/market/product-card-container";
 import SelectionPanelBottom from "@/components/market/selection-panel-bottom";
 import SelectionPanelRight from "@/components/market/selection-panel-right";
@@ -70,7 +71,7 @@ export default function MarketContent({ products }: MarketContentProps) {
           />
 
           {/* 데스크톱용 오른쪽 패널 */}
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <SelectionPanelRight
               products={products}
               isEditMode={isEditMode}
@@ -83,7 +84,14 @@ export default function MarketContent({ products }: MarketContentProps) {
         </div>
       </div>
 
-      {/* 모바일용 하단 패널 */}
+      {/* 모바일용 상품 선택 버튼 (편집모드가 아닐 때) */}
+      <MobileSelectionButton
+        isEditMode={isEditMode}
+        onToggleEditMode={toggleEditMode}
+        selectedCount={selectedProductIds.size}
+      />
+
+      {/* 모바일용 하단 패널 (편집모드일 때) */}
       <SelectionPanelBottom
         products={products}
         isEditMode={isEditMode}

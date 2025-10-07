@@ -1,3 +1,5 @@
+import { Check } from "lucide-react";
+
 import { Badge } from "@/components/common/shadcn/badge";
 import { Button } from "@/components/common/shadcn/button";
 import {
@@ -44,6 +46,7 @@ export default function SelectionPanelRight({
               size="sm"
               onClick={onToggleEditMode}
             >
+              <Check className="h-4 w-4" />
               {isEditMode ? "편집 완료" : "상품 선택"}
             </Button>
           </div>

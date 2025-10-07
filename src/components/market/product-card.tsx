@@ -72,7 +72,7 @@ export default function ProductCard({
           <Checkbox
             checked={isSelected}
             onCheckedChange={handleCheckboxChange}
-            className="h-5 w-5 border-2 bg-white/90 shadow-md"
+            className="h-5 w-5 border-2 bg-white/90 shadow-md dark:bg-white/95"
           />
         </div>
       )}

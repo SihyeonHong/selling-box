@@ -1,3 +1,5 @@
+import { Check } from "lucide-react";
+
 import { Badge } from "@/components/common/shadcn/badge";
 import { Button } from "@/components/common/shadcn/button";
 import { Separator } from "@/components/common/shadcn/separator";
@@ -27,8 +29,13 @@ export default function SelectionPanelBottom({
     selectedProductIds,
   });
 
+  // 편집모드가 아닐 때는 렌더링하지 않음
+  if (!isEditMode) {
+    return null;
+  }
+
   return (
-    <div className="bg-background fixed right-0 bottom-0 left-0 z-50 border-t shadow-[0_-8px_12px_-2px_rgba(0,0,0,0.15),0_-4px_8px_-2px_rgba(0,0,0,0.1)] md:hidden">
+    <div className="bg-background fixed right-0 bottom-0 left-0 z-50 border-t shadow-[0_-8px_12px_-2px_rgba(0,0,0,0.15),0_-4px_8px_-2px_rgba(0,0,0,0.1)] lg:hidden">
       <div className="space-y-3 p-4">
         {/* 편집모드 토글 버튼 */}
         <div className="flex justify-center">
@@ -37,6 +44,7 @@ export default function SelectionPanelBottom({
             onClick={onToggleEditMode}
             className="w-full max-w-xs"
           >
+            <Check className="h-4 w-4" />
             {isEditMode ? "편집 완료" : "상품 선택"}
           </Button>
         </div>
@@ -83,9 +91,7 @@ export default function SelectionPanelBottom({
                     size="sm"
                     onClick={() => onRemoveProduct(product.productId)}
                     className="text-muted-foreground hover:text-destructive h-6 w-6 p-0"
-                  >
-                    ×
-                  </Button>
+                  ></Button>
                 </div>
               ))}
             </div>
