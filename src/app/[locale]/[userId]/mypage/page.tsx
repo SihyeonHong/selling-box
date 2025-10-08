@@ -1,4 +1,5 @@
 import ImageContainer from "@/components/mypage/image-container";
+import MarketInfo from "@/components/mypage/market-info";
 import ProductRegistration from "@/components/mypage/product-registration";
 
 interface Props {
@@ -12,15 +13,14 @@ export default async function MyPage({ params }: Props) {
   const { userId } = await params;
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1>My Page</h1>
-        <p>User ID: {userId}</p>
+    <>
+      <div className="container mx-auto flex flex-col gap-8">
+        <MarketInfo userId={userId} />
+
+        <ProductRegistration />
+
+        <ImageContainer />
       </div>
-
-      <ProductRegistration />
-
-      <ImageContainer />
-    </div>
+    </>
   );
 }
