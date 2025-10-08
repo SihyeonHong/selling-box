@@ -45,4 +45,5 @@ const longNameProduct: Product = {
   prize: 999999,
   images: [`https://picsum.photos/300/300`],
   description: "긴 상품명 테스트용 상품입니다.",
+  state: "ACTIVE",
 };

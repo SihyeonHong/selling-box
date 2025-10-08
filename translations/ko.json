@@ -2,14 +2,16 @@
   "title": {
     "title": "셀링 박스"
   },
+  "header": {
+    "login": "로그인",
+    "register": "회원가입"
+  },
   "footer": {
     "brandName": "얼마",
     "description": "판매 중인 물건을 한 눈에 둘러보세요",
     "services": "서비스",
     "support": "지원",
     "home": "홈",
-    "login": "로그인",
-    "register": "회원가입",
     "notice": "공지사항",
     "tester": "테스터",
     "copyright": "© 2025 얼마. All rights reserved.",

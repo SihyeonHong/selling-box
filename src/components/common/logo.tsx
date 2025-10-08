@@ -8,7 +8,7 @@ export default function Logo({ className = "" }: LogoProps) {
   return (
     <Link
       href="/"
-      className={`text-foreground hover:text-primary text-2xl font-bold transition-colors ${className}`}
+      className={`dark:text-primary dark:hover:text-foreground text-foreground hover:text-primary text-2xl font-bold transition-colors ${className}`}
     >
       얼마
     </Link>
