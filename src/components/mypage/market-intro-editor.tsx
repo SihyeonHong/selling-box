@@ -38,8 +38,8 @@ export default function MarketIntroEditor({ userId }: { userId: string }) {
 
   return (
     <Card className="w-full max-w-6xl gap-0">
-      <CardContent className="flex gap-6">
-        <div className="flex flex-col items-center gap-4">
+      <CardContent className="flex flex-col gap-6 sm:flex-row">
+        <div className="flex flex-col items-center gap-2">
           <div className="relative">
             {marketInfo.profileImg ? (
               <Image
@@ -87,6 +87,7 @@ export default function MarketIntroEditor({ userId }: { userId: string }) {
             기본 이미지로 초기화
           </Button>
         </div>
+
         <div className="flex-1 space-y-4">
           <div className="space-y-2">
             <Label htmlFor="marketName" className="text-sm font-medium">

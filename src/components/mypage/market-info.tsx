@@ -22,26 +22,24 @@ export default function MarketInfo({ userId }: { userId: string }) {
   };
 
   return (
-    <div className="flex w-full flex-col gap-4 p-8">
+    <div className="flex w-full max-w-6xl flex-col justify-center gap-4 p-8">
       <h1 className="text-2xl font-bold">내 마켓 정보</h1>
 
-      <div className="flex items-center gap-3">
-        <p className="">
-          내 마켓 바로가기:{" "}
-          <Link
-            href={`/${userId}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="break-all text-blue-600 underline hover:text-blue-800"
-          >
-            {marketUrl}
-          </Link>
-        </p>
+      <div className="bg-muted flex flex-col gap-1 rounded-md p-4 sm:flex-row">
+        <span>내 마켓 바로가기:</span>
+        <Link
+          href={`/${userId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="break-all text-blue-600 underline hover:text-blue-800"
+        >
+          {marketUrl}
+        </Link>
         <Button
           onClick={handleCopyLink}
           variant="outline"
           size="sm"
-          className="shrink-0"
+          className="w-full sm:w-auto sm:shrink-0"
         >
           링크 복사
         </Button>
