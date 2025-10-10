@@ -1,27 +1,58 @@
-import { Product } from "@/types/product";
+"use client";
 
-interface UseProductSelectionProps {
-  products: Product[];
-  selectedProductIds: Set<string>;
-}
+import { useState } from "react";
 
-export function useProductSelection({
-  products,
-  selectedProductIds,
-}: UseProductSelectionProps) {
-  // 선택된 상품들 계산
-  const selectedProducts = products.filter((product) =>
-    selectedProductIds.has(product.productId),
+export function useProductSelection() {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [selectedProductIds, setSelectedProductIds] = useState<Set<string>>(
+    new Set(),
   );
 
-  // 총 가격 계산
-  const totalPrice = selectedProducts.reduce(
-    (sum, product) => sum + (product.prize || 0),
-    0,
-  );
+  // 상품 선택/해제 핸들러
+  const handleProductSelectionChange = (
+    productId: string,
+    isSelected: boolean,
+  ) => {
+    setSelectedProductIds((prev) => {
+      const newSet = new Set(prev);
+      if (isSelected) {
+        newSet.add(productId);
+      } else {
+        newSet.delete(productId);
+      }
+      return newSet;
+    });
+  };
+
+  // 개별 상품 제거
+  const handleRemoveProduct = (productId: string) => {
+    setSelectedProductIds((prev) => {
+      const newSet = new Set(prev);
+      newSet.delete(productId);
+      return newSet;
+    });
+  };
+
+  // 전체 선택 해제
+  const handleClearAll = () => {
+    setSelectedProductIds(new Set());
+  };
+
+  // 편집모드 토글
+  const handleToggleEditMode = () => {
+    setIsEditMode((prev) => !prev);
+    if (isEditMode) {
+      // 편집모드 종료 시 선택 해제
+      setSelectedProductIds(new Set());
+    }
+  };
 
   return {
-    selectedProducts,
-    totalPrice,
+    isEditMode,
+    selectedProductIds,
+    onProductSelectionChange: handleProductSelectionChange,
+    onRemoveProduct: handleRemoveProduct,
+    onClearAll: handleClearAll,
+    onToggleEditMode: handleToggleEditMode,
   };
 }

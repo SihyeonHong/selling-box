@@ -1,4 +1,4 @@
-import ProductCard from "@/components/market/product-card";
+import ProductCard from "@/components/common/products/product-card";
 import { Product } from "@/types/product";
 
 interface ProductCardContainerProps {

@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/common/shadcn/card";
 import { Separator } from "@/components/common/shadcn/separator";
-import { useProductSelection } from "@/hooks/useProductSelection";
+import { useSelectionControl } from "@/hooks/useSelectionControl";
 import { Product } from "@/types/product";
 import { formatPrice } from "@/utils/format-price";
 
@@ -30,7 +30,7 @@ export default function SelectionPanelRight({
   onRemoveProduct,
   onClearAll,
 }: SelectionPanelRightProps) {
-  const { selectedProducts, totalPrice } = useProductSelection({
+  const { selectedProducts, totalPrice } = useSelectionControl({
     products,
     selectedProductIds,
   });

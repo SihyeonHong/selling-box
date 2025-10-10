@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
-
+import ProductCardContainer from "@/components/common/products/product-card-container";
 import MobileSelectionButton from "@/components/market/mobile-selection-button";
-import ProductCardContainer from "@/components/market/product-card-container";
 import SelectionPanelBottom from "@/components/market/selection-panel-bottom";
 import SelectionPanelRight from "@/components/market/selection-panel-right";
+import { useProductSelection } from "@/hooks/useProductSelection";
 import { Product } from "@/types/product";
 
 interface MarketContentProps {
@@ -13,49 +12,14 @@ interface MarketContentProps {
 }
 
 export default function MarketContent({ products }: MarketContentProps) {
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [selectedProductIds, setSelectedProductIds] = useState<Set<string>>(
-    new Set(),
-  );
-
-  // 상품 선택/해제 핸들러
-  const handleProductSelectionChange = (
-    productId: string,
-    isSelected: boolean,
-  ) => {
-    setSelectedProductIds((prev) => {
-      const newSet = new Set(prev);
-      if (isSelected) {
-        newSet.add(productId);
-      } else {
-        newSet.delete(productId);
-      }
-      return newSet;
-    });
-  };
-
-  // 개별 상품 제거
-  const handleRemoveProduct = (productId: string) => {
-    setSelectedProductIds((prev) => {
-      const newSet = new Set(prev);
-      newSet.delete(productId);
-      return newSet;
-    });
-  };
-
-  // 전체 선택 해제
-  const handleClearAll = () => {
-    setSelectedProductIds(new Set());
-  };
-
-  // 편집모드 토글
-  const toggleEditMode = () => {
-    setIsEditMode((prev) => !prev);
-    if (isEditMode) {
-      // 편집모드 종료 시 선택 해제
-      setSelectedProductIds(new Set());
-    }
-  };
+  const {
+    isEditMode,
+    selectedProductIds,
+    onProductSelectionChange,
+    onRemoveProduct,
+    onClearAll,
+    onToggleEditMode,
+  } = useProductSelection();
 
   return (
     <>
@@ -67,7 +31,7 @@ export default function MarketContent({ products }: MarketContentProps) {
             products={products}
             isEditMode={isEditMode}
             selectedProductIds={selectedProductIds}
-            onProductSelectionChange={handleProductSelectionChange}
+            onProductSelectionChange={onProductSelectionChange}
           />
 
           {/* 데스크톱용 오른쪽 패널 */}
@@ -75,10 +39,10 @@ export default function MarketContent({ products }: MarketContentProps) {
             <SelectionPanelRight
               products={products}
               isEditMode={isEditMode}
-              onToggleEditMode={toggleEditMode}
+              onToggleEditMode={onToggleEditMode}
               selectedProductIds={selectedProductIds}
-              onRemoveProduct={handleRemoveProduct}
-              onClearAll={handleClearAll}
+              onRemoveProduct={onRemoveProduct}
+              onClearAll={onClearAll}
             />
           </div>
         </div>
@@ -87,7 +51,7 @@ export default function MarketContent({ products }: MarketContentProps) {
       {/* 모바일용 상품 선택 버튼 (편집모드가 아닐 때) */}
       <MobileSelectionButton
         isEditMode={isEditMode}
-        onToggleEditMode={toggleEditMode}
+        onToggleEditMode={onToggleEditMode}
         selectedCount={selectedProductIds.size}
       />
 
@@ -95,10 +59,10 @@ export default function MarketContent({ products }: MarketContentProps) {
       <SelectionPanelBottom
         products={products}
         isEditMode={isEditMode}
-        onToggleEditMode={toggleEditMode}
+        onToggleEditMode={onToggleEditMode}
         selectedProductIds={selectedProductIds}
-        onRemoveProduct={handleRemoveProduct}
-        onClearAll={handleClearAll}
+        onRemoveProduct={onRemoveProduct}
+        onClearAll={onClearAll}
       />
     </>
   );
