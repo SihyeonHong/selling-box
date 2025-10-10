@@ -1,6 +1,6 @@
-import ImageContainer from "@/components/mypage/image-container";
-import MarketInfo from "@/components/mypage/market-info";
-import ProductRegistration from "@/components/mypage/product-registration";
+import { Separator } from "@/components/common/shadcn/separator";
+import MyMarketInfo from "@/components/mypage/my-market-info";
+import MyProducts from "@/components/mypage/my-products";
 
 interface Props {
   params: Promise<{
@@ -15,11 +15,10 @@ export default async function MyPage({ params }: Props) {
   return (
     <>
       <div className="container mx-auto flex flex-col gap-8">
-        <MarketInfo userId={userId} />
-
-        <ProductRegistration />
-
-        <ImageContainer />
+        <MyMarketInfo userId={userId} />
+        <Separator />
+        <MyProducts userId={userId} />
+        <Separator />
       </div>
     </>
   );

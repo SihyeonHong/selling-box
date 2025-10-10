@@ -12,12 +12,13 @@ import { Textarea } from "@/components/common/shadcn/textarea";
 import { Market } from "@/types/market";
 
 export default function MarketIntroEditor({ userId }: { userId: string }) {
-  const [marketInfo, setMarketInfo] = useState<Market>({
+  const initialMarketInfo = {
     userId: userId,
     marketName: userId + "의 마켓",
     description: "프사에 있는 QR 옾챗이나 트위터 디엠 주세요",
     profileImg: null,
-  });
+  };
+  const [marketInfo, setMarketInfo] = useState<Market>(initialMarketInfo);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -34,6 +35,10 @@ export default function MarketIntroEditor({ userId }: { userId: string }) {
 
   const handleResetImage = () => {
     setMarketInfo({ ...marketInfo, profileImg: "" });
+  };
+
+  const handleReset = () => {
+    setMarketInfo(initialMarketInfo);
   };
 
   return (
@@ -116,6 +121,12 @@ export default function MarketIntroEditor({ userId }: { userId: string }) {
                 setMarketInfo({ ...marketInfo, description: e.target.value })
               }
             />
+          </div>
+          <div className="flex flex-wrap justify-end gap-2">
+            <Button>이름과 설명 저장하기</Button>
+            <Button variant="outline" onClick={handleReset}>
+              되돌리기
+            </Button>
           </div>
         </div>
       </CardContent>

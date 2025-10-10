@@ -9,7 +9,7 @@ import { copyToClipboard } from "@/utils/clipboard";
 
 const BASE_URL = "https://selling-box.com";
 
-export default function MarketInfo({ userId }: { userId: string }) {
+export default function MyMarketInfo({ userId }: { userId: string }) {
   const marketUrl = `${BASE_URL}/${userId}`;
 
   const handleCopyLink = async () => {
