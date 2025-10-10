@@ -1,6 +1,7 @@
 "use client";
 
 import ProductCardContainer from "@/components/common/products/product-card-container";
+import ProductPanelMobile from "@/components/mypage/product-panel-mobile";
 import { useProductSelection } from "@/hooks/useProductSelection";
 import { Product } from "@/types/product";
 
@@ -10,13 +11,20 @@ interface MyProductsProps {
 }
 
 export default function MyProducts({ userId, products }: MyProductsProps) {
-  const { isEditMode, selectedProductIds, onProductSelectionChange } =
-    useProductSelection();
+  const {
+    isEditMode,
+    selectedProductIds,
+    onProductSelectionChange,
+    onToggleEditMode,
+  } = useProductSelection();
 
   return (
-    <div className="w-full max-w-6xl px-8">
-      <h1 className="mb-4 text-2xl font-bold">내 상품 관리</h1>
-
+    <div className="w-full max-w-6xl space-y-8 px-8">
+      <h1 className="text-2xl font-bold">내 상품 관리</h1>
+      <ProductPanelMobile
+        isEditMode={isEditMode}
+        onToggleEditMode={onToggleEditMode}
+      />
       <ProductCardContainer
         products={products}
         isLoggedIn
