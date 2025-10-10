@@ -1,15 +1,20 @@
 import ProductCard from "@/components/common/products/product-card";
+import AddProductCard from "@/components/mypage/add-product-card";
 import { Product } from "@/types/product";
 
 interface ProductCardContainerProps {
   products: Product[];
   isEditMode: boolean;
   selectedProductIds: Set<string>;
+  isLoggedIn?: boolean;
+  userId?: string;
   onProductSelectionChange: (productId: string, isSelected: boolean) => void;
 }
 
 export default function ProductCardContainer({
   products,
+  isLoggedIn = false,
+  userId,
   isEditMode,
   selectedProductIds,
   onProductSelectionChange,
@@ -33,6 +38,7 @@ export default function ProductCardContainer({
         isSelected={selectedProductIds.has(longNameProduct.productId)}
         onSelectionChange={onProductSelectionChange}
       />
+      {isLoggedIn && userId && <AddProductCard userId={userId} />}
     </div>
   );
 }
