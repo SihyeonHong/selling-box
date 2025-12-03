@@ -7,14 +7,35 @@ import { Button } from "@/components/common/shadcn/button";
 import { Card } from "@/components/common/shadcn/card";
 import { Input } from "@/components/common/shadcn/input";
 import { Label } from "@/components/common/shadcn/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/common/shadcn/select";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/common/shadcn/table";
 import { Product } from "@/types/product";
+import { SALE_STATE_LIST, SaleState } from "@/types/product";
 import { generateUniqueProductName } from "@/utils/product-name";
+
+import NoImage from "@/components/common/no-image";
 
 export default function ProductRegistration() {
   const [formData, setFormData] = useState({
     name: generateUniqueProductName(),
     prize: "",
     description: "",
+    state: "ACTIVE",
+    uploadedAt: new Date(),
+    editedAt: new Date(),
   });
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -57,6 +78,8 @@ export default function ProductRegistration() {
       images: [],
       userId: "test-user-id",
       state: "ACTIVE",
+      uploadedAt: new Date(),
+      editedAt: new Date(),
     };
 
     console.log("상품 등록:", productData);
@@ -67,6 +90,9 @@ export default function ProductRegistration() {
       name: generateUniqueProductName(),
       prize: "",
       description: "",
+      state: "ACTIVE",
+      uploadedAt: new Date(),
+      editedAt: new Date(),
     });
     setSelectedFile(null);
     if (previewUrl) {
@@ -107,58 +133,80 @@ export default function ProductRegistration() {
   };
 
   return (
-    <Card className="mx-auto w-full max-w-2xl p-6">
+    <Card className="mx-auto w-full max-w-6xl p-6">
       <div className="space-y-6">
-        <div>
-          <h2 className="mb-2 text-center text-2xl font-bold">상품 등록</h2>
-          <p className="text-muted-foreground text-center">
-            새로운 상품을 등록해보세요
-          </p>
+        <div className="space-y-2">
+          <h2 className="text-2xl font-bold">상품 등록</h2>
+          <p className="text-muted-foreground">새로운 상품을 등록해보세요</p>
         </div>
 
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>대표 이미지</TableHead>
+              <TableHead>상품명</TableHead>
+              <TableHead>가격</TableHead>
+              <TableHead>상태</TableHead>
+              <TableHead>상세정보</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <NoImage size="sm" rounded="none" />
+              </TableCell>
+              <TableCell>
+                <Input
+                  id="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
+                  placeholder="상품명을 입력하세요"
+                  className={errors.name ? "border-red-500" : ""}
+                />
+                {errors.name && (
+                  <p className="text-sm text-red-500">{errors.name}</p>
+                )}
+              </TableCell>
+              <TableCell>
+                <Input
+                  id="prize"
+                  type="number"
+                  value={formData.prize}
+                  onChange={(e) => handleInputChange("prize", e.target.value)}
+                  placeholder="가격 미정"
+                  className={errors.prize ? "border-red-500" : ""}
+                />
+                {errors.prize && (
+                  <p className="text-sm text-red-500">{errors.prize}</p>
+                )}
+              </TableCell>
+              <TableCell>
+                <Select
+                  value={formData.state}
+                  onValueChange={(value) => handleInputChange("state", value)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="상태를 선택하세요" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {SALE_STATE_LIST.map((state: SaleState) => (
+                      <SelectItem key={state} value={state}>
+                        {state}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </TableCell>
+              <TableCell>
+                상세정보: 이미지 multiple input, 그 중에 썸네일 고르기, 상품
+                설명. 모달.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">상품명 *</Label>
-            <Input
-              id="name"
-              type="text"
-              value={formData.name}
-              onChange={(e) => handleInputChange("name", e.target.value)}
-              placeholder="상품명을 입력하세요"
-              className={errors.name ? "border-red-500" : ""}
-            />
-            {errors.name && (
-              <p className="text-sm text-red-500">{errors.name}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="prize">가격</Label>
-            <Input
-              id="prize"
-              type="number"
-              value={formData.prize}
-              onChange={(e) => handleInputChange("prize", e.target.value)}
-              placeholder="가격을 입력하세요 (선택사항)"
-              min="0"
-              className={errors.prize ? "border-red-500" : ""}
-            />
-            {errors.prize && (
-              <p className="text-sm text-red-500">{errors.prize}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="description">상품 설명</Label>
-            <textarea
-              id="description"
-              value={formData.description}
-              onChange={(e) => handleInputChange("description", e.target.value)}
-              placeholder="상품에 대한 설명을 입력하세요 (선택사항)"
-              className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring min-h-[80px] w-full resize-y rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-            />
-          </div>
-
           <div className="space-y-2">
             <Label htmlFor="image">상품 이미지</Label>
             <Input
@@ -191,9 +239,6 @@ export default function ProductRegistration() {
           </div>
 
           <div className="flex gap-3 pt-4">
-            <Button type="submit" className="flex-1">
-              상품 등록
-            </Button>
             <Button
               type="button"
               variant="outline"
@@ -203,6 +248,9 @@ export default function ProductRegistration() {
                   name: generateUniqueProductName(),
                   prize: "",
                   description: "",
+                  state: "ACTIVE",
+                  uploadedAt: new Date(),
+                  editedAt: new Date(),
                 });
                 setSelectedFile(null);
                 if (previewUrl) {

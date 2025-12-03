@@ -1,11 +1,10 @@
+import BulkProductRegister from "@/components/mypage/bulk-product-register";
 import ImageContainer from "@/components/mypage/image-container";
-import ProductRegistration from "@/components/mypage/product-registration";
 
 export default function NewProductPage() {
   return (
     <div>
-      NewProductPage
-      <ProductRegistration />
+      <BulkProductRegister />
       <ImageContainer />
     </div>
   );

@@ -9,6 +9,8 @@ const faker = new Faker({ locale: [ko, en] });
  * 단일 Product 더미 데이터를 생성합니다.
  */
 export function createMockProduct(userId?: string): Product {
+  const uploadedAt = faker.date.anytime();
+
   // picsum.photos에서 랜덤 이미지 생성
   const randomSeed = faker.string.alphanumeric(10);
   const imageUrl = `https://picsum.photos/seed/${randomSeed}/300/300`;
@@ -31,6 +33,8 @@ export function createMockProduct(userId?: string): Product {
     images,
     description: faker.commerce.productDescription(),
     state: "ACTIVE",
+    uploadedAt,
+    editedAt: uploadedAt,
   };
 }
 
