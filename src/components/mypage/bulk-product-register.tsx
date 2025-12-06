@@ -4,6 +4,15 @@ import { Edit, Image as ImageIcon, Plus, Trash2, X } from "lucide-react";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/common/shadcn/table";
+
 type SaleState = "ACTIVE" | "PRIVATE" | "TRADING" | "RESERVED" | "SOLD";
 
 interface Product {
@@ -269,135 +278,136 @@ export default function BulkProductRegister() {
 
         {/* 상품 테이블 */}
         <div className="overflow-hidden rounded-lg bg-white shadow">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="border-b border-gray-200 bg-gray-50">
-                <tr>
-                  <th className="w-10 px-3 py-3"></th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    이미지
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    상품명
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    가격
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    상태
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                    설명
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {products.map((product) => (
-                  <tr key={product.tempId} className="hover:bg-gray-50">
-                    <td className="px-3 py-4">
-                      <button
-                        onClick={() => removeProduct(product.tempId)}
-                        className="cursor-pointer text-red-500 transition hover:text-red-700"
-                      >
-                        <span className="text-lg">❌</span>
-                      </button>
-                    </td>
-                    <td className="px-4 py-4">
-                      <div className="flex gap-2">
-                        {product.images.length === 0 ? (
-                          <div className="flex h-16 w-16 items-center justify-center rounded border-2 border-dashed border-gray-300 text-gray-400">
-                            <ImageIcon size={20} />
-                          </div>
-                        ) : (
-                          product.images.map((img, imgIndex) => (
-                            <div key={imgIndex} className="group relative">
-                              <Image
-                                src={img}
-                                alt=""
-                                width={64}
-                                height={64}
-                                unoptimized
-                                className="h-16 w-16 rounded border border-gray-300 object-cover"
-                              />
-                              {imgIndex === 0 && (
-                                <span className="absolute top-0 left-0 rounded-tl bg-blue-600 px-1 text-xs text-white">
-                                  썸네일
-                                </span>
-                              )}
-                              <button
-                                onClick={() =>
-                                  removeImageFromProduct(product.tempId, img)
-                                }
-                                className="absolute -top-2 -right-2 cursor-pointer rounded-full bg-red-500 p-1 text-white opacity-0 transition group-hover:opacity-100"
-                              >
-                                <X size={12} />
-                              </button>
+          <Table>
+            <TableHeader className="border-b border-gray-200 bg-gray-50">
+              <TableRow>
+                <TableHead className="w-10 px-3 py-3"></TableHead>
+                <TableHead className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  이미지
+                </TableHead>
+                <TableHead className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  상품명
+                </TableHead>
+                <TableHead className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  가격
+                </TableHead>
+                <TableHead className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                  상태
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="divide-y divide-gray-200">
+              {products.map((product) => (
+                <TableRow key={product.tempId} className="hover:bg-gray-50">
+                  <TableCell className="px-3 py-4 align-top">
+                    <button
+                      onClick={() => removeProduct(product.tempId)}
+                      className="cursor-pointer text-red-500 transition hover:text-red-700"
+                    >
+                      <span className="text-lg">❌</span>
+                    </button>
+                  </TableCell>
+                  <TableCell colSpan={4} className="px-4 py-4">
+                    <div className="flex flex-col gap-3">
+                      <div className="flex items-center gap-4">
+                        <div className="flex gap-2">
+                          {product.images.length === 0 ? (
+                            <div className="flex h-16 w-16 items-center justify-center rounded border-2 border-dashed border-gray-300 text-gray-400">
+                              <ImageIcon size={20} />
                             </div>
-                          ))
-                        )}
+                          ) : (
+                            product.images.map((img, imgIndex) => (
+                              <div key={imgIndex} className="group relative">
+                                <Image
+                                  src={img}
+                                  alt=""
+                                  width={64}
+                                  height={64}
+                                  unoptimized
+                                  className="h-16 w-16 rounded border border-gray-300 object-cover"
+                                />
+                                {imgIndex === 0 && (
+                                  <span className="absolute top-0 left-0 rounded-tl bg-blue-600 px-1 text-xs text-white">
+                                    썸네일
+                                  </span>
+                                )}
+                                <button
+                                  onClick={() =>
+                                    removeImageFromProduct(product.tempId, img)
+                                  }
+                                  className="absolute -top-2 -right-2 cursor-pointer rounded-full bg-red-500 p-1 text-white opacity-0 transition group-hover:opacity-100"
+                                >
+                                  <X size={12} />
+                                </button>
+                              </div>
+                            ))
+                          )}
+                        </div>
+                        <input
+                          type="text"
+                          value={product.name}
+                          onChange={(e) =>
+                            updateProduct(
+                              product.tempId,
+                              "name",
+                              e.target.value,
+                            )
+                          }
+                          placeholder="상품명 입력"
+                          className="flex-1 rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        />
+                        <input
+                          type="number"
+                          value={product.prize || ""}
+                          onChange={(e) =>
+                            updateProduct(
+                              product.tempId,
+                              "prize",
+                              e.target.value ? Number(e.target.value) : null,
+                            )
+                          }
+                          placeholder="가격 미정"
+                          className="w-32 rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        />
+                        <select
+                          value={product.state}
+                          onChange={(e) =>
+                            updateProduct(
+                              product.tempId,
+                              "state",
+                              e.target.value,
+                            )
+                          }
+                          className="rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        >
+                          {SALE_STATES.map((state) => (
+                            <option key={state.value} value={state.value}>
+                              {state.label}
+                            </option>
+                          ))}
+                        </select>
                       </div>
-                    </td>
-                    <td className="px-4 py-4">
-                      <input
-                        type="text"
-                        value={product.name}
-                        onChange={(e) =>
-                          updateProduct(product.tempId, "name", e.target.value)
-                        }
-                        placeholder="상품명 입력"
-                        className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                      />
-                    </td>
-                    <td className="px-4 py-4">
-                      <input
-                        type="number"
-                        value={product.prize || ""}
-                        onChange={(e) =>
-                          updateProduct(
-                            product.tempId,
-                            "prize",
-                            e.target.value ? Number(e.target.value) : null,
-                          )
-                        }
-                        placeholder="가격 미정"
-                        className="w-32 rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                      />
-                    </td>
-                    <td className="px-4 py-4">
-                      <select
-                        value={product.state}
-                        onChange={(e) =>
-                          updateProduct(product.tempId, "state", e.target.value)
-                        }
-                        className="rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                      >
-                        {SALE_STATES.map((state) => (
-                          <option key={state.value} value={state.value}>
-                            {state.label}
-                          </option>
-                        ))}
-                      </select>
-                    </td>
-                    <td className="px-4 py-4">
-                      <input
-                        type="text"
-                        value={product.description || ""}
-                        onChange={(e) =>
-                          updateProduct(
-                            product.tempId,
-                            "description",
-                            e.target.value || null,
-                          )
-                        }
-                        placeholder="설명 (선택)"
-                        className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                      <div>
+                        <input
+                          type="text"
+                          value={product.description || ""}
+                          onChange={(e) =>
+                            updateProduct(
+                              product.tempId,
+                              "description",
+                              e.target.value || null,
+                            )
+                          }
+                          placeholder="상세 설명 (선택)"
+                          className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        />
+                      </div>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
           <div className="border-t border-gray-200 p-4">
             <button
               onClick={addProduct}
