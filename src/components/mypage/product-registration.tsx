@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef, useState } from "react";
 
+import NoImage from "@/components/common/no-image";
 import { Button } from "@/components/common/shadcn/button";
 import { Card } from "@/components/common/shadcn/card";
 import { Input } from "@/components/common/shadcn/input";
@@ -22,11 +23,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/common/shadcn/table";
-import { Product } from "@/types/product";
-import { SALE_STATE_LIST, SaleState } from "@/types/product";
+import { Product, SALE_STATE_LIST, SaleState } from "@/types/product";
 import { generateUniqueProductName } from "@/utils/product-name";
-
-import NoImage from "@/components/common/no-image";
 
 export default function ProductRegistration() {
   const [formData, setFormData] = useState({

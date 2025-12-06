@@ -1,14 +1,7 @@
 "use client";
 
-import {
-  Plus,
-  Image as ImageIcon,
-  Trash2,
-  GripVertical,
-  X,
-  Edit,
-} from "lucide-react";
-import React, { useState, useRef } from "react";
+import { Edit, Image as ImageIcon, Plus, Trash2, X } from "lucide-react";
+import React, { useRef, useState } from "react";
 
 type SaleState = "ACTIVE" | "PRIVATE" | "TRADING" | "RESERVED" | "SOLD";
 
@@ -292,17 +285,18 @@ export default function BulkProductRegister() {
                   <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     설명
                   </th>
-                  <th className="w-10 px-3 py-3"></th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {products.map((product) => (
                   <tr key={product.tempId} className="hover:bg-gray-50">
                     <td className="px-3 py-4">
-                      <GripVertical
-                        size={16}
-                        className="cursor-move text-gray-400"
-                      />
+                      <button
+                        onClick={() => removeProduct(product.tempId)}
+                        className="text-red-500 transition hover:text-red-700"
+                      >
+                        <span className="text-lg">❌</span>
+                      </button>
                     </td>
                     <td className="px-4 py-4">
                       <div className="flex gap-2">
@@ -391,14 +385,6 @@ export default function BulkProductRegister() {
                         placeholder="설명 (선택)"
                         className="w-full rounded border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                       />
-                    </td>
-                    <td className="px-3 py-4">
-                      <button
-                        onClick={() => removeProduct(product.tempId)}
-                        className="text-red-500 transition hover:text-red-700"
-                      >
-                        <Trash2 size={18} />
-                      </button>
                     </td>
                   </tr>
                 ))}
