@@ -1,8 +1,8 @@
 export interface Market {
-  marketId: string;
   userId: string;
-  name: string;
-  description?: string;
+  marketName: string;
+  description: string | null;
+  profileImg: string | null;
 }
 
 export interface CutLineType {

@@ -1,5 +1,82 @@
 {
   "title": {
     "title": "Selling Box"
+  },
+  "header": {
+    "login": "Login",
+    "register": "Register"
+  },
+  "footer": {
+    "brandName": "HowMuch",
+    "description": "Browse items for sale at a glance",
+    "services": "Services",
+    "support": "Support",
+    "home": "Home",
+    "notice": "Notice",
+    "tester": "Tester",
+    "copyright": "© 2025 HowMuch. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "subtitle": "Sign in to your account to use Selling Box",
+      "email": "Email",
+      "password": "Password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot your password?",
+      "loginButton": "Login",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "emailPlaceholder": "Enter your email",
+      "passwordPlaceholder": "Enter your password"
+    },
+    "register": {
+      "title": "Register",
+      "subtitle": "Create a new account to get started with Selling Box",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "namePlaceholder": "Enter your name",
+      "emailPlaceholder": "Enter your email",
+      "passwordPlaceholder": "Enter your password",
+      "confirmPasswordPlaceholder": "Confirm your password",
+      "termsAgreement": "I agree to the Terms of Service",
+      "registerButton": "Register",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "nameNote": "Name cannot be changed",
+      "emailNote": "Email cannot be changed",
+      "checkDuplicate": "Check Availability",
+      "sendVerification": "Verify",
+      "checking": "Checking...",
+      "sending": "Sending...",
+      "available": "Available",
+      "unavailable": "Already in use",
+      "verificationSent": "Verification code sent",
+      "verified": "Verified"
+    },
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 8 characters",
+      "passwordConfirmRequired": "Password confirmation is required",
+      "passwordMismatch": "Passwords do not match",
+      "nameRequired": "Name is required",
+      "nameMinLength": "Name must be at least 2 characters",
+      "nameMaxLength": "Name must be 20 characters or less",
+      "nameInvalid": "Name can only contain letters, numbers, and underscores",
+      "termsRequired": "You must agree to the Terms of Service"
+    },
+    "messages": {
+      "loginSuccess": "Successfully logged in",
+      "loginError": "Login failed. Please check your email and password",
+      "registerSuccess": "Registration completed successfully",
+      "registerError": "Registration failed. Please try again",
+      "loading": "Processing..."
+    }
   }
 }

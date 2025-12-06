@@ -1,17 +1,12 @@
 export interface User {
-  userId: string;
+  id: string;
   name: string;
   email: string;
 }
 
 export interface RegisterForm {
-  userId: string;
-  password: string;
   name: string;
+  id: string;
   email: string;
-}
-
-export interface LoginForm {
-  userId: string;
   password: string;
 }

@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 
+import Footer from "@/components/common/footer";
+import Header from "@/components/common/header";
 import { routing } from "@/i18n/routing";
 import { MyLayoutProps } from "@/types/props";
 
@@ -14,5 +16,11 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  return <NextIntlClientProvider>{children}</NextIntlClientProvider>;
+  return (
+    <NextIntlClientProvider>
+      <Header />
+      <main className="min-h-screen pt-16">{children}</main>
+      <Footer />
+    </NextIntlClientProvider>
+  );
 }
