@@ -10,12 +10,21 @@ export interface Product {
   editedAt: Date | string;
 }
 
-export const SALE_STATE_LIST = [
-  "ACTIVE", // 판매 중
-  "PRIVATE", // 비공개
-  "TRADING", // 거래 진행 중
-  "RESERVED", // 거래 예약
-  "SOLD", // 판매 완료
-] as const;
+export interface TempProduct {
+  tempId: string;
+  name: string;
+  prize: number | null;
+  description: string | null;
+  images: string[];
+  state: SaleState;
+}
 
-export type SaleState = (typeof SALE_STATE_LIST)[number];
+export const SALE_STATE_CONFIG = {
+  ACTIVE: { label: "판매중", className: "bg-green-100 text-green-800" },
+  PRIVATE: { label: "비공개", className: "bg-gray-100 text-gray-800" },
+  TRADING: { label: "거래중", className: "bg-blue-100 text-blue-800" },
+  RESERVED: { label: "예약", className: "bg-yellow-100 text-yellow-800" },
+  SOLD: { label: "완료", className: "bg-red-100 text-red-800" },
+} as const;
+
+export type SaleState = keyof typeof SALE_STATE_CONFIG;

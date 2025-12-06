@@ -23,7 +23,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/common/shadcn/table";
-import { Product, SALE_STATE_LIST, SaleState } from "@/types/product";
+import { Product, SALE_STATE_CONFIG, SaleState } from "@/types/product";
 import { generateUniqueProductName } from "@/utils/product-name";
 
 export default function ProductRegistration() {
@@ -188,11 +188,13 @@ export default function ProductRegistration() {
                     <SelectValue placeholder="상태를 선택하세요" />
                   </SelectTrigger>
                   <SelectContent>
-                    {SALE_STATE_LIST.map((state: SaleState) => (
-                      <SelectItem key={state} value={state}>
-                        {state}
-                      </SelectItem>
-                    ))}
+                    {(Object.keys(SALE_STATE_CONFIG) as SaleState[]).map(
+                      (state) => (
+                        <SelectItem key={state} value={state}>
+                          {SALE_STATE_CONFIG[state].label}
+                        </SelectItem>
+                      ),
+                    )}
                   </SelectContent>
                 </Select>
               </TableCell>
