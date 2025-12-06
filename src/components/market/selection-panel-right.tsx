@@ -89,7 +89,7 @@ export default function SelectionPanelRight({
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-medium">{product.name}</p>
                 <p className="text-muted-foreground text-xs">
-                  {product.prize ? formatPrice(product.prize) : "가격 미정"}
+                  {formatPrice(product.prize)}
                 </p>
               </div>
               <Button

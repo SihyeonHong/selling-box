@@ -62,7 +62,7 @@ export default function ProductCard({
             </ItemTitle>
           </div>
           <ItemDescription className="text-center">
-            {product.prize ? formatPrice(product.prize) : "가격 미정"}
+            {formatPrice(product.prize)}
           </ItemDescription>
         </ItemContent>
       </Item>

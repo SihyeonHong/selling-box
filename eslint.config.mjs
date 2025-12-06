@@ -34,7 +34,7 @@ const eslintConfig = [
       "react-hooks/exhaustive-deps": "warn", // useEffect 등의 의존성 배열 누락 감지
 
       // 7. 사용하지 않는 import/변수 관련 룰
-      "unused-imports/no-unused-imports": "warn", // 사용하지 않는 import 자동 경고
+      "unused-imports/no-unused-imports": "error", // 사용하지 않는 import 자동 제거
       "unused-imports/no-unused-vars": [
         "warn",
         {

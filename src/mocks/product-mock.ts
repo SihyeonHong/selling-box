@@ -1,4 +1,4 @@
-import { Faker, ko, en } from "@faker-js/faker";
+import { en, Faker, ko } from "@faker-js/faker";
 
 import { Product } from "@/types/product";
 import { generateUniqueProductName } from "@/utils/product-name";
@@ -19,8 +19,8 @@ export function createMockProduct(userId?: string): Product {
   const shouldHaveImage = faker.datatype.boolean({ probability: 0.8 });
   const images = shouldHaveImage ? [imageUrl] : [];
 
-  // 20% 확률로 null, 80% 확률로 가격 포함
-  const shouldHavePrice = faker.datatype.boolean({ probability: 0.8 });
+  // 10% 확률로 null, 90% 확률로 가격 포함
+  const shouldHavePrice = faker.datatype.boolean({ probability: 0.9 });
   const prize = shouldHavePrice
     ? faker.number.int({ min: 1000, max: 1000000 })
     : null;

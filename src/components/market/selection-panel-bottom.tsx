@@ -83,7 +83,7 @@ export default function SelectionPanelBottom({
                       {product.name}
                     </p>
                     <p className="text-muted-foreground text-xs">
-                      {product.prize ? formatPrice(product.prize) : "가격 미정"}
+                      {formatPrice(product.prize)}
                     </p>
                   </div>
                   <Button
