@@ -1,6 +1,7 @@
 "use client";
 
 import { Edit, Image as ImageIcon, Plus, Trash2, X } from "lucide-react";
+import Image from "next/image";
 import React, { useRef, useState } from "react";
 
 type SaleState = "ACTIVE" | "PRIVATE" | "TRADING" | "RESERVED" | "SOLD";
@@ -166,7 +167,7 @@ export default function BulkProductRegister() {
           <h1 className="text-2xl font-semibold text-gray-900">
             상품 일괄 등록
           </h1>
-          <button className="rounded-lg bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700">
+          <button className="cursor-pointer rounded-lg bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700">
             {products.length}개 상품 등록
           </button>
         </div>
@@ -208,9 +209,12 @@ export default function BulkProductRegister() {
                     toggleImageSelection(img.id);
                   }}
                 >
-                  <img
+                  <Image
                     src={img.url}
                     alt=""
+                    width={80}
+                    height={80}
+                    unoptimized
                     className="h-full w-full rounded border-2 border-gray-300 object-cover"
                   />
                   <div className="absolute top-1 left-1">
@@ -232,7 +236,7 @@ export default function BulkProductRegister() {
             <button
               onClick={handleRegisterAsIndividualProducts}
               disabled={selectedImageIds.size === 0}
-              className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-blue-600"
+              className="flex cursor-pointer items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-blue-600"
             >
               <Plus size={16} />
               각각의 상품으로 등록하기
@@ -240,14 +244,14 @@ export default function BulkProductRegister() {
             <button
               onClick={handleRegisterAsSingleProduct}
               disabled={selectedImageIds.size === 0}
-              className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-green-600"
+              className="flex cursor-pointer items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-green-600"
             >
               <Plus size={16} />한 상품으로 등록하기
             </button>
             <button
               onClick={handleEditImages}
               disabled={selectedImageIds.size === 0}
-              className="flex items-center gap-2 rounded-lg bg-purple-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-purple-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-purple-600"
+              className="flex cursor-pointer items-center gap-2 rounded-lg bg-purple-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-purple-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-purple-600"
             >
               <Edit size={16} />
               사진 편집하기
@@ -255,7 +259,7 @@ export default function BulkProductRegister() {
             <button
               onClick={handleDeleteSelectedImages}
               disabled={selectedImageIds.size === 0}
-              className="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-red-600"
+              className="flex cursor-pointer items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-red-600"
             >
               <Trash2 size={16} />
               삭제
@@ -293,7 +297,7 @@ export default function BulkProductRegister() {
                     <td className="px-3 py-4">
                       <button
                         onClick={() => removeProduct(product.tempId)}
-                        className="text-red-500 transition hover:text-red-700"
+                        className="cursor-pointer text-red-500 transition hover:text-red-700"
                       >
                         <span className="text-lg">❌</span>
                       </button>
@@ -307,9 +311,12 @@ export default function BulkProductRegister() {
                         ) : (
                           product.images.map((img, imgIndex) => (
                             <div key={imgIndex} className="group relative">
-                              <img
+                              <Image
                                 src={img}
                                 alt=""
+                                width={64}
+                                height={64}
+                                unoptimized
                                 className="h-16 w-16 rounded border border-gray-300 object-cover"
                               />
                               {imgIndex === 0 && (
@@ -321,7 +328,7 @@ export default function BulkProductRegister() {
                                 onClick={() =>
                                   removeImageFromProduct(product.tempId, img)
                                 }
-                                className="absolute -top-2 -right-2 rounded-full bg-red-500 p-1 text-white opacity-0 transition group-hover:opacity-100"
+                                className="absolute -top-2 -right-2 cursor-pointer rounded-full bg-red-500 p-1 text-white opacity-0 transition group-hover:opacity-100"
                               >
                                 <X size={12} />
                               </button>
@@ -394,7 +401,7 @@ export default function BulkProductRegister() {
           <div className="border-t border-gray-200 p-4">
             <button
               onClick={addProduct}
-              className="flex w-full items-center justify-center gap-2 rounded border-2 border-dashed border-gray-300 py-2 text-gray-500 transition hover:border-gray-400 hover:text-gray-600"
+              className="flex w-full cursor-pointer items-center justify-center gap-2 rounded border-2 border-dashed border-gray-300 py-2 text-gray-500 transition hover:border-gray-400 hover:text-gray-600"
             >
               <Plus size={18} />
               상품 추가
