@@ -13,8 +13,5 @@
     "typescript",
     "typescriptreact"
   ],
-  "eslint.problems": {
-    "shortenToSingleLine": false
-  },
   "prettier.enable": true
 }
